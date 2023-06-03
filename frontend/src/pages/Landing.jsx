@@ -6,10 +6,12 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import testFetch from "../services/testFetch";
 
 export default function Landing() {
+  const [address, setAddress] = useState("Tallinas 69");
+
   const fetch = async () => {
     const response = await testFetch();
     console.log(response);
@@ -19,9 +21,22 @@ export default function Landing() {
     fetch();
   }, []);
   return (
-    <Container sx={{ display: "flex", flexDirection: "column" }}>
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        gap: 5,
+      }}
+    >
       <Box>
-        <TextField id="" label="Ievadi adresi" value={""} />
+        <TextField
+          label="Ievadi adresi"
+          value={address}
+          variant="outlined"
+          onChange={({ target }) => setAddress(target.value)}
+          fullWidth
+        />
       </Box>
     </Container>
   );

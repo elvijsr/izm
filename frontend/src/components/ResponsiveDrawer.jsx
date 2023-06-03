@@ -8,21 +8,20 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from "@mui/material/ListItemText"
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu';
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Logo from "../assets/Logo.svg"
-import Avatar from "@mui/material/Avatar"
+import Logo from "../assets/Logo.svg";
+import Avatar from "@mui/material/Avatar";
 
 function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
-
 
   const handleDrawerToggle = () => {
     if (matches) {
@@ -31,15 +30,15 @@ function ResponsiveDrawer(props) {
   };
 
   const pages = [
-    { 
-        name: "Meklēt"
+    {
+      name: "Meklēt",
     },
     {
-        name: "Tops",
+      name: "Tops",
     },
-    { 
-        name: "Karte",
-    }
+    {
+      name: "Karte",
+    },
   ];
 
   const drawerWidth = 240;
@@ -51,11 +50,16 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Toolbar sx={{ gap: 1, alignItems: "center" }}>
-        <Link to="/" sx={{display: "flex", flexDirection: "row", textDecoration: "none", color: "black" }}>
-          <Typography
-            variant="h5"
-            noWrap
-          >
+        <Link
+          to="/"
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            textDecoration: "none",
+            color: "black",
+          }}
+        >
+          <Typography variant="h5" noWrap>
             SkoluRadars
           </Typography>
         </Link>
@@ -74,9 +78,7 @@ function ResponsiveDrawer(props) {
               },
             }}
           >
-            <ListItemText>
-                {item.name}
-            </ListItemText>
+            <ListItemText>{item.name}</ListItemText>
           </ListItemButton>
         ))}
       </List>
@@ -94,21 +96,20 @@ function ResponsiveDrawer(props) {
           display: { sm: "none" },
         }}
       >
-        <Toolbar sx={{alignItems: "center"}}>
-            <IconButton aria-label="" onClick={handleDrawerToggle}>
-              <MenuIcon />
-            </IconButton>
-            <Link to="/" style={{ textDecoration: "none"}}>
-            <Typography
-              variant="h5"
-              component="div"
-              color="#000000"
-            >
+        <Toolbar sx={{ alignItems: "center" }}>
+          <IconButton aria-label="" onClick={handleDrawerToggle}>
+            <MenuIcon />
+          </IconButton>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Typography variant="h5" component="div" color="#000000">
               SkoluRadars
             </Typography>
           </Link>
-          <Avatar color="#FFFFFF" sx={{backgroundColor: "#FFFFFF", margin: 1}}>
-          <img src={Logo} className="logo" width="40"/>
+          <Avatar
+            color="#FFFFFF"
+            sx={{ backgroundColor: "#FFFFFF", margin: 1 }}
+          >
+            <img src={Logo} className="logo" width="40" />
           </Avatar>
         </Toolbar>
       </AppBar>
@@ -154,7 +155,7 @@ function ResponsiveDrawer(props) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          py: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           mt: { xs: 7, sm: 1 },
           height: "100vh",
@@ -162,7 +163,7 @@ function ResponsiveDrawer(props) {
           alignItems: "flex-start",
         }}
       >
-        <Container maxWidth="md">
+        <Container>
           <Outlet />
         </Container>
       </Box>
