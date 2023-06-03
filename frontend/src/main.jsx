@@ -26,7 +26,6 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: "Lexend",
     color: "#000000"
   },
 });
