@@ -14,6 +14,8 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Logo from "../assets/Logo.svg"
+import Avatar from "@mui/material/Avatar"
 
 function ResponsiveDrawer(props) {
   const { window } = props;
@@ -49,7 +51,7 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Toolbar sx={{ gap: 1, alignItems: "center" }}>
-        <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+        <Link to="/" sx={{display: "flex", flexDirection: "row", textDecoration: "none", color: "black" }}>
           <Typography
             variant="h5"
             noWrap
@@ -92,7 +94,7 @@ function ResponsiveDrawer(props) {
           display: { sm: "none" },
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{alignItems: "center"}}>
             <IconButton aria-label="" onClick={handleDrawerToggle}>
               <MenuIcon />
             </IconButton>
@@ -105,6 +107,9 @@ function ResponsiveDrawer(props) {
               SkoluRadars
             </Typography>
           </Link>
+          <Avatar color="#FFFFFF" sx={{backgroundColor: "#FFFFFF", padding: 3}}>
+          <img src={Logo} className="logo" width="99"/>
+          </Avatar>
         </Toolbar>
       </AppBar>
       <Box
