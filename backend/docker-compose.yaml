@@ -1,0 +1,6 @@
+version: '3'
+services:
+  backend:
+    build: .
+    ports:
+      - 55588:55588
