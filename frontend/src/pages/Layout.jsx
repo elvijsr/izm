@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 import Box from "@mui/material/Box";
-import ResponsiveDrawer from "../components/responsiveDrawer";
+import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
