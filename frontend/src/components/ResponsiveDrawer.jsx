@@ -100,7 +100,7 @@ function ResponsiveDrawer(props) {
             <Typography
               variant="h5"
               component="div"
-              color="#FFFFFF"
+              color="#000000"
             >
               SkoluRadars
             </Typography>
