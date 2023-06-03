@@ -107,8 +107,8 @@ function ResponsiveDrawer(props) {
               SkoluRadars
             </Typography>
           </Link>
-          <Avatar color="#FFFFFF" sx={{backgroundColor: "#FFFFFF", padding: 3}}>
-          <img src={Logo} className="logo" width="99"/>
+          <Avatar color="#FFFFFF" sx={{backgroundColor: "#FFFFFF", margin: 1}}>
+          <img src={Logo} className="logo" width="40"/>
           </Avatar>
         </Toolbar>
       </AppBar>
