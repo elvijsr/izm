@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 
 const GoogleMapComponent = ({ schools, setFilteredSchools, origin }) => {
-  const [distance, setDistance] = useState([]);
   const destinations = schools.map((school) => school.address);
   const [googleApiObj, setIsGoogleApiLoadedObj] = useState(null);
   const [center, setCenter] = useState([56.95, 24.116667]);
@@ -23,7 +22,7 @@ const GoogleMapComponent = ({ schools, setFilteredSchools, origin }) => {
       { address: origin },
       (destinationResults, destinationStatus) => {
         if (destinationStatus === "OK") {
-          const {lat, lng} = destinationResults[0].geometry.location;
+          const { lat, lng } = destinationResults[0].geometry.location;
           const originGeocodeAsArray = [lat(), lng()];
           setCenter(originGeocodeAsArray);
         } else {
@@ -89,6 +88,10 @@ const GoogleMapComponent = ({ schools, setFilteredSchools, origin }) => {
             (element) => element.distance.text
           );
 
+          const durations = response.rows[0].elements.map(
+            (element) => element.duration.text
+          );
+
           const floatDistances = distances.map((dist) =>
             parseFloat(dist.substring(0, dist.indexOf(" ")))
           );
@@ -96,12 +99,11 @@ const GoogleMapComponent = ({ schools, setFilteredSchools, origin }) => {
           const newSchools = schools.map((school, index) => ({
             ...school,
             distance: floatDistances[index],
+            duration: durations[index]
           }));
           console.log(JSON.stringify(newSchools));
 
           filterSchoolsByDistanceRadius(newSchools, maps, map);
-
-          setDistance(distances);
         } else {
           console.error("Error fetching distance", status);
         }
@@ -124,7 +126,6 @@ const GoogleMapComponent = ({ schools, setFilteredSchools, origin }) => {
           })
         }
       ></GoogleMapReact>
-      <p>Distance: {distance}</p>
     </div>
   );
 };
