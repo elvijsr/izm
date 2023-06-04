@@ -3,12 +3,14 @@ import {
   Box,
   IconButton,
   Button,
+  Chip,
   Link,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Collapse,
 } from "@mui/material";
 
 import Accordion from "@mui/material/Accordion";
@@ -18,6 +20,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import OpenInNew from "@mui/icons-material/OpenInNew";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 import * as React from "react";
 
 export default function SchoolListItem(props) {
@@ -38,8 +42,15 @@ export default function SchoolListItem(props) {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
   return (
     <Accordion
+      elevation={0}
       expanded={expanded === props.school.id}
       onChange={handleAccordionExpansion(props.school.id)}
     >
@@ -59,9 +70,63 @@ export default function SchoolListItem(props) {
               ? props.school.address
               : cutTextAfterSecondComma(props.school.address)}
           </Typography>
+          <Box>
+            <Chip
+              label={`OCE: ${(props.school.oce_index_21 * 100).toFixed(2)}%`}
+            />
+          </Box>
         </Box>
       </AccordionSummary>
       <AccordionDetails>
+        <Box>
+          <Typography>Interešu izglītība</Typography>
+          <Typography>{props.school.interests}</Typography>
+        </Box>
+        <List>
+          <ListItem onClick={handleClick}>
+            <ListItemText>
+              <Typography sx={{ fontWeight: "700" }}>OCE indekss:</Typography>
+            </ListItemText>
+            <Typography>
+              {(props.school.oce_index_21 * 100).toFixed(2)}%
+            </Typography>
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem>
+                <ListItemText>
+                  <Typography sx={{ fontWeight: "500" }}>
+                    OCE Latviešu valoda:
+                  </Typography>
+                </ListItemText>
+                <Typography>
+                  {(props.school.oce_latv_21 * 100).toFixed(2)}%
+                </Typography>
+              </ListItem>
+              <ListItem>
+                <ListItemText>
+                  <Typography sx={{ fontWeight: "500" }}>
+                    OCE Matemātika:
+                  </Typography>
+                </ListItemText>
+                <Typography>
+                  {(props.school.oce_math_21 * 100).toFixed(2)}%
+                </Typography>
+              </ListItem>
+              <ListItem>
+                <ListItemText>
+                  <Typography sx={{ fontWeight: "500" }}>
+                    OCE Svešvaloda:
+                  </Typography>
+                </ListItemText>
+                <Typography>
+                  {(props.school.oce_sves_21 * 100).toFixed(2)}%
+                </Typography>
+              </ListItem>
+            </List>
+          </Collapse>
+        </List>
         <List dense>
           {props.school.web && (
             <ListItem
