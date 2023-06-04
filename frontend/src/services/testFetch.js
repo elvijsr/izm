@@ -1,6 +1,6 @@
 const recordFavorite = async () => {
   try {
-    const response = await fetch("https://api.skoluradars.com/test", {
+    const response = await fetch("https://skoluradarsapi.brocco.eu/test", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
