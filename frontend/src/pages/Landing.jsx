@@ -13,6 +13,7 @@ import SchoolListItem from "../components/SchoolListItem";
 import { useEffect, useState } from "react";
 import testFetch from "../services/testFetch";
 import schoolList from "../assets/skolas.json";
+import Map from "../components/Map";
 
 export default function Landing() {
   const [address, setAddress] = useState("Tallinas 69");
@@ -47,6 +48,9 @@ export default function Landing() {
           onChange={({ target }) => setAddress(target.value)}
           fullWidth
         />
+      </Box>
+      <Box sx={{ mb: 5 }}>
+        <Map />
       </Box>
       <Box>
         {filteredSchools.map((item) => (
