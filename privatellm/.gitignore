@@ -1,0 +1,5 @@
+db
+models
+credentials.json
+.env
+venv
