@@ -29,6 +29,7 @@ import MapIcon from "@mui/icons-material/Map";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Snackbar from "@mui/material/Snackbar";
 import CloseIcon from "@mui/icons-material/Close";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import { useTheme } from "@mui/material/styles";
 import * as React from "react";
 import { useEffect } from "react";
@@ -56,40 +57,6 @@ export default function SchoolListItem(props) {
   };
 
   const theme = useTheme();
-
-  const handleCopy = (text) => {
-    navigator.clipboard.writeText(text);
-  };
-
-  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
-
-  const handleSnackbarClick = () => {
-    setSnackbarOpen(true);
-  };
-
-  const handleSnackbarClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setSnackbarOpen(false);
-  };
-
-  const action = (
-    <React.Fragment>
-      <Button color="secondary" size="small" onClick={handleSnackbarClose}>
-        UNDO
-      </Button>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleSnackbarClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
 
   return (
     <Accordion
@@ -146,12 +113,21 @@ export default function SchoolListItem(props) {
       </AccordionSummary>
       <AccordionDetails>
         <List>
-          <ListItem>
+          <ListItem sx={{ gap: 1 }}>
             <ListItemText>
               <Typography sx={{ fontWeight: "700" }}>Attālums</Typography>
             </ListItemText>
             <Typography sx={{ fontWeight: "500" }}>
               {props.school.distance + " km"}
+            </Typography>
+            <Typography
+              sx={{ display: "flex", fontWeight: "500", alignItems: "center" }}
+            >
+              <Chip
+                size="small"
+                icon={<DirectionsCarIcon />}
+                label={props.school.duration}
+              />
             </Typography>
           </ListItem>
           <ListItem onClick={handleOceClick} sx={{ gap: 1 }}>
@@ -258,62 +234,43 @@ export default function SchoolListItem(props) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <ListItemButton>
-                <ListItemIcon>
-                  <OpenInNew />
-                </ListItemIcon>
-                <ListItemText primary={props.school.web} />
-              </ListItemButton>
+              <ListItemIcon>
+                <OpenInNew />
+              </ListItemIcon>
+              <ListItemText primary={props.school.web} />
             </ListItem>
           )}
           {props.school.email && (
-            <ListItem onClick={handleSnackbarClick}>
-              <ListItemButton onClick={handleCopy(props.school.email)}>
-                <ListItemIcon>
-                  <AlternateEmailIcon />
-                </ListItemIcon>
-                <ListItemText primary={props.school.email} />
-                <ContentCopyIcon />
-              </ListItemButton>
+            <ListItem>
+              <ListItemIcon>
+                <AlternateEmailIcon />
+              </ListItemIcon>
+              <ListItemText primary={props.school.email} />
             </ListItem>
           )}
           {props.school.phone && (
             <ListItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <LocalPhoneIcon />
-                </ListItemIcon>
-                <ListItemText primary={props.school.phone} />
-              </ListItemButton>
+              <ListItemIcon>
+                <LocalPhoneIcon />
+              </ListItemIcon>
+              <ListItemText primary={props.school.phone} />
             </ListItem>
           )}
           {props.school.address && (
             <ListItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <LocationOnIcon />
-                </ListItemIcon>
-                <ListItemText>
-                  <Typography variant="subtitle2" sx={{ fontWeight: "400" }}>
-                    {accordionExpanded
-                      ? props.school.address
-                      : cutTextAfterSecondComma(props.school.address)}
-                  </Typography>
-                </ListItemText>
-              </ListItemButton>
+              <ListItemIcon>
+                <LocationOnIcon />
+              </ListItemIcon>
+              <ListItemText>
+                <Typography variant="subtitle2" sx={{ fontWeight: "400" }}>
+                  {accordionExpanded
+                    ? props.school.address
+                    : cutTextAfterSecondComma(props.school.address)}
+                </Typography>
+              </ListItemText>
             </ListItem>
           )}
         </List>
-        <Snackbar
-          open={snackbarOpen}
-          autoHideDuration={6000}
-          onClose={handleSnackbarClose}
-          action={action}
-        >
-          <Alert severity="warning" sx={{ width: "100%" }}>
-            Kopēts starpliktuvē
-          </Alert>
-        </Snackbar>
       </AccordionDetails>
     </Accordion>
   );
