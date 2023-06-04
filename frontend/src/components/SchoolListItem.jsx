@@ -11,6 +11,7 @@ import {
   ListItemIcon,
   ListItemText,
   Collapse,
+  Alert,
 } from "@mui/material";
 
 import Accordion from "@mui/material/Accordion";
@@ -25,8 +26,12 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import GroupIcon from "@mui/icons-material/Group";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MapIcon from "@mui/icons-material/Map";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import Snackbar from "@mui/material/Snackbar";
+import CloseIcon from "@mui/icons-material/Close";
 import { useTheme } from "@mui/material/styles";
 import * as React from "react";
+import { useEffect } from "react";
 
 export default function SchoolListItem(props) {
   function cutTextAfterSecondComma(inputText) {
@@ -39,32 +44,68 @@ export default function SchoolListItem(props) {
     }
     return inputText;
   }
-  const [expanded, setExpanded] = React.useState(false);
+  const [accordionExpanded, setAccordionExpanded] = React.useState(false);
 
   const handleAccordionExpansion = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+    setAccordionExpanded(isExpanded ? panel : false);
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
+  const [oceExpanded, setOceExpanded] = React.useState(false);
+  const handleOceClick = () => {
+    setOceExpanded(!oceExpanded);
   };
 
   const theme = useTheme();
 
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+  };
+
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+
+  const handleSnackbarClick = () => {
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbarOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleSnackbarClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleSnackbarClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
+
   return (
     <Accordion
-      sx={{ borderRadius: 5, border: expanded ? "1px solid lightgrey" : "" }}
+      sx={{
+        borderRadius: 5,
+        border: accordionExpanded ? "1px solid lightgrey" : "",
+      }}
       elevation={0}
-      expanded={expanded === props.school.id}
+      expanded={accordionExpanded === props.school.id}
       onChange={handleAccordionExpansion(props.school.id)}
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
           <Typography
             sx={{ fontWeight: "bold" }}
-            variant={expanded ? "h6" : "body1"}
+            variant={accordionExpanded ? "h6" : "body1"}
           >
             {props.school.name}
           </Typography>
@@ -77,7 +118,7 @@ export default function SchoolListItem(props) {
               {props.school.pupil_count} skolēni
             </Typography>
           </Box>
-          <Box sx={{ gap: 1, display: expanded ? "none" : "flex" }}>
+          <Box sx={{ gap: 1, display: accordionExpanded ? "none" : "flex" }}>
             <Chip
               size="small"
               label={`OCE: ${(props.school.oce_index_21 * 100).toFixed(2)}%`}
@@ -113,8 +154,8 @@ export default function SchoolListItem(props) {
               {props.school.distance + " km"}
             </Typography>
           </ListItem>
-          <ListItem onClick={handleClick} sx={{ gap: 1 }}>
-            {open ? <ExpandLess /> : <ExpandMore />}
+          <ListItem onClick={handleOceClick} sx={{ gap: 1 }}>
+            {oceExpanded ? <ExpandLess /> : <ExpandMore />}
             <ListItemText>
               <Typography sx={{ fontWeight: "700" }}>OCE indekss:</Typography>
             </ListItemText>
@@ -135,7 +176,7 @@ export default function SchoolListItem(props) {
               ).toFixed(2)}%`}
             />
           </ListItem>
-          <Collapse in={open} timeout="auto" unmountOnExit>
+          <Collapse in={oceExpanded} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItem sx={{ gap: 1 }}>
                 <ListItemText>
@@ -226,12 +267,13 @@ export default function SchoolListItem(props) {
             </ListItem>
           )}
           {props.school.email && (
-            <ListItem>
-              <ListItemButton>
+            <ListItem onClick={handleSnackbarClick}>
+              <ListItemButton onClick={handleCopy(props.school.email)}>
                 <ListItemIcon>
                   <AlternateEmailIcon />
                 </ListItemIcon>
                 <ListItemText primary={props.school.email} />
+                <ContentCopyIcon />
               </ListItemButton>
             </ListItem>
           )}
@@ -253,7 +295,7 @@ export default function SchoolListItem(props) {
                 </ListItemIcon>
                 <ListItemText>
                   <Typography variant="subtitle2" sx={{ fontWeight: "400" }}>
-                    {expanded
+                    {accordionExpanded
                       ? props.school.address
                       : cutTextAfterSecondComma(props.school.address)}
                   </Typography>
@@ -262,6 +304,16 @@ export default function SchoolListItem(props) {
             </ListItem>
           )}
         </List>
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={6000}
+          onClose={handleSnackbarClose}
+          action={action}
+        >
+          <Alert severity="warning" sx={{ width: "100%" }}>
+            Kopēts starpliktuvē
+          </Alert>
+        </Snackbar>
       </AccordionDetails>
     </Accordion>
   );
