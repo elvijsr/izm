@@ -106,6 +106,7 @@ export default function SchoolListItem(props) {
         </Box>
         <List>
           <ListItem onClick={handleClick} sx={{ gap: 1 }}>
+            {open ? <ExpandLess /> : <ExpandMore />}
             <ListItemText>
               <Typography sx={{ fontWeight: "700" }}>OCE indekss:</Typography>
             </ListItemText>
@@ -125,7 +126,6 @@ export default function SchoolListItem(props) {
                 100
               ).toFixed(2)}%`}
             />
-            {open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
