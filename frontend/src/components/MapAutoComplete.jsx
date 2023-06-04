@@ -54,7 +54,11 @@ const GoogleMapAutocomplete = ({ location, setLocation }) => {
             }}
           />
           <div>
-            {loading && <div>Loading...</div>}
+            {loading && (
+              <Typography sx={{ p: 1 }} variant="body1">
+                Loading...
+              </Typography>
+            )}
             {suggestions.length > 0 && (
               <Paper sx={{ p: 1 }} elevation={1}>
                 {suggestions.map((suggestion, i) => (
