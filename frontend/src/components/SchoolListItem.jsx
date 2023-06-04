@@ -137,11 +137,7 @@ export default function SchoolListItem(props) {
               <Chip
                 size="small"
                 icon={<DirectionsWalkIcon />}
-                label={
-                  props.school.walking_duration
-                    ? props.school.walking_duration
-                    : "hz"
-                }
+                label={props.school.walkingDuration}
               />
             </Typography>
           </ListItem>
