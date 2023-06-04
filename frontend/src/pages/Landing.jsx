@@ -11,25 +11,23 @@ import {
 } from "@mui/material";
 import SchoolListItem from "../components/SchoolListItem";
 import { useEffect, useState } from "react";
-import testFetch from "../services/testFetch";
-import schoolList from "../assets/skolas.json";
+import fetchSchools from "../services/fetchSchools";
 import Map from "../components/Map";
 
 export default function Landing() {
   const [address, setAddress] = useState("");
-  const [filteredSchools, setFilteredSchools] = useState(schoolList);
-  const fetch = async () => {
-    const response = await testFetch();
+  const [filteredSchools, setFilteredSchools] = useState([]);
+  const fetchSchoolsFromAPI = async () => {
+    const response = await fetchSchools();
     console.log(response);
-  };
-
-  useEffect(() => {
-    const filtered = schoolList.filter((school) =>
+    const filtered = response.data.filter((school) =>
       school.address.toLowerCase().includes(address.toLowerCase())
     );
     setFilteredSchools(filtered);
+  };
 
-    fetch();
+  useEffect(() => {
+    fetchSchoolsFromAPI();
   }, [address]);
   return (
     <Box
