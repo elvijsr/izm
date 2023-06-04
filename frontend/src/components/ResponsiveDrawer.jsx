@@ -15,6 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Logo from "../assets/Logo.svg";
+import LogoWhite from "../assets/Logo-white.svg";
 import Avatar from "@mui/material/Avatar";
 
 function ResponsiveDrawer(props) {
@@ -50,19 +51,24 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Toolbar sx={{ gap: 1, alignItems: "center" }}>
-        <Link
+        <Box
+          component={Link}
           to="/"
           sx={{
             display: "flex",
             flexDirection: "row",
             textDecoration: "none",
-            color: "black",
+            alignItems: "center",
+            color: "#B15CF4",
           }}
         >
-          <Typography variant="h5" noWrap>
+          <Typography variant="h5" sx={{ fontWeight: 700 }} noWrap>
             SkoluRadars
           </Typography>
-        </Link>
+          <Avatar sx={{ backgroundColor: "#FFFFFF", margin: 1 }}>
+            <img src={Logo} className="logo" width="35" />
+          </Avatar>
+        </Box>
       </Toolbar>
       <List>
         {pages.map((item, index) => (
@@ -97,19 +103,25 @@ function ResponsiveDrawer(props) {
         }}
       >
         <Toolbar sx={{ alignItems: "center" }}>
-          <IconButton aria-label="" onClick={handleDrawerToggle}>
+          <IconButton
+            color="secondary"
+            aria-label=""
+            onClick={handleDrawerToggle}
+          >
             <MenuIcon />
           </IconButton>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <Typography variant="h5" component="div" color="#000000">
+            <Typography
+              variant="h5"
+              sx={{ fontWeight: 700 }}
+              component="div"
+              color="#FFFFFF"
+            >
               SkoluRadars
             </Typography>
           </Link>
-          <Avatar
-            color="#FFFFFF"
-            sx={{ backgroundColor: "#FFFFFF", margin: 1 }}
-          >
-            <img src={Logo} className="logo" width="40" />
+          <Avatar sx={{ backgroundColor: "#B15CF4", margin: 1 }}>
+            <img src={LogoWhite} className="logo" width="35" />
           </Avatar>
         </Toolbar>
       </AppBar>
