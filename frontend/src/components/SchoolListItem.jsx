@@ -23,6 +23,7 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import GroupIcon from "@mui/icons-material/Group";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useTheme } from "@mui/material/styles";
 import * as React from "react";
 
@@ -54,12 +55,13 @@ export default function SchoolListItem(props) {
 
   return (
     <Accordion
+      sx={{ borderRadius: 5, border: expanded ? "1px solid lightgrey" : "" }}
       elevation={0}
       expanded={expanded === props.school.id}
       onChange={handleAccordionExpansion(props.school.id)}
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
           <Typography
             sx={{ fontWeight: "bold" }}
             variant={expanded ? "h6" : "body1"}
@@ -69,16 +71,13 @@ export default function SchoolListItem(props) {
           <Typography variant="subtitle2" sx={{ color: "#4F4F4F" }}>
             {props.school.sub_type}
           </Typography>
-          <Typography variant="subtitle1">
-            {expanded
-              ? props.school.address
-              : cutTextAfterSecondComma(props.school.address)}
-          </Typography>
           <Box sx={{ gap: 1, display: expanded ? "none" : "flex" }}>
             <Chip
+              size="small"
               label={`OCE: ${(props.school.oce_index_21 * 100).toFixed(2)}%`}
             />
             <Chip
+              size="small"
               sx={{
                 backgroundColor:
                   props.school.oce_index_21 - props.school.oce_index_20 > 0
@@ -90,7 +89,11 @@ export default function SchoolListItem(props) {
                 100
               ).toFixed(2)}%`}
             />
-            <Chip icon={<GroupIcon />} label={props.school.pupil_count} />
+            <Chip
+              size="small"
+              icon={<GroupIcon />}
+              label={props.school.pupil_count}
+            />
           </Box>
         </Box>
       </AccordionSummary>
@@ -103,6 +106,7 @@ export default function SchoolListItem(props) {
         </Box>
         <List>
           <ListItem onClick={handleClick} sx={{ gap: 1 }}>
+            {open ? <ExpandLess /> : <ExpandMore />}
             <ListItemText>
               <Typography sx={{ fontWeight: "700" }}>OCE indekss:</Typography>
             </ListItemText>
@@ -110,6 +114,7 @@ export default function SchoolListItem(props) {
               {(props.school.oce_index_21 * 100).toFixed(2)}%
             </Typography>
             <Chip
+              size="small"
               sx={{
                 backgroundColor:
                   props.school.oce_index_21 - props.school.oce_index_20 > 0
@@ -121,7 +126,6 @@ export default function SchoolListItem(props) {
                 100
               ).toFixed(2)}%`}
             />
-            {open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
@@ -135,6 +139,7 @@ export default function SchoolListItem(props) {
                   {(props.school.oce_latv_21 * 100).toFixed(2)}%
                 </Typography>
                 <Chip
+                  size="small"
                   sx={{
                     backgroundColor:
                       props.school.oce_latv_21 - props.school.oce_latv_20 > 0
@@ -157,6 +162,7 @@ export default function SchoolListItem(props) {
                   {(props.school.oce_math_21 * 100).toFixed(2)}%
                 </Typography>
                 <Chip
+                  size="small"
                   sx={{
                     backgroundColor:
                       props.school.oce_math_21 - props.school.oce_math_20 > 0
@@ -179,6 +185,7 @@ export default function SchoolListItem(props) {
                   {(props.school.oce_sves_21 * 100).toFixed(2)}%
                 </Typography>
                 <Chip
+                  size="small"
                   sx={{
                     backgroundColor:
                       props.school.oce_sves_21 - props.school.oce_sves_20 > 0
@@ -194,7 +201,7 @@ export default function SchoolListItem(props) {
             </List>
           </Collapse>
         </List>
-        <List dense>
+        <List dense disablePadding>
           {props.school.web && (
             <ListItem
               component={Link}
@@ -227,6 +234,22 @@ export default function SchoolListItem(props) {
                   <LocalPhoneIcon />
                 </ListItemIcon>
                 <ListItemText primary={props.school.phone} />
+              </ListItemButton>
+            </ListItem>
+          )}
+          {props.school.address && (
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LocationOnIcon />
+                </ListItemIcon>
+                <ListItemText>
+                  <Typography variant="subtitle2" sx={{ fontWeight: "400" }}>
+                    {expanded
+                      ? props.school.address
+                      : cutTextAfterSecondComma(props.school.address)}
+                  </Typography>
+                </ListItemText>
               </ListItemButton>
             </ListItem>
           )}
