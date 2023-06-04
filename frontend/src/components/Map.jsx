@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import GoogleMapReact from "google-map-react";
 
 const GoogleMapComponent = ({
@@ -10,6 +10,7 @@ const GoogleMapComponent = ({
   const destinations = schools.map((school) => school.address);
   const [googleApiObj, setIsGoogleApiLoadedObj] = useState(null);
   const [center, setCenter] = useState([56.95, 24.116667]);
+  const prevMarkersRef = useRef([]);
 
   useEffect(() => {
     if (googleApiObj) {
@@ -38,9 +39,11 @@ const GoogleMapComponent = ({
   };
 
   const filterSchoolsByDistanceRadius = (allSchools, maps, map) => {
+    console.log(allSchools.length);
     const filteredSchools = allSchools.filter(
       (school) => school.distance <= schoolRadius
     );
+    console.log(filteredSchools.length);
     setFilteredSchools(filteredSchools);
     addSchoolMarkers(filteredSchools, maps, map);
   };
@@ -48,6 +51,10 @@ const GoogleMapComponent = ({
   const addSchoolMarkers = (filteredSchools, maps, map) => {
     const geocoder = new maps.Geocoder();
     const destinations = filteredSchools.map((school) => school.address);
+
+    for (let m of prevMarkersRef.current) {
+      m.setMap(null);
+    }
 
     destinations.forEach((destinationAddress, index) => {
       geocoder.geocode(
@@ -60,6 +67,8 @@ const GoogleMapComponent = ({
               map: map,
               label: "D",
             });
+
+            prevMarkersRef.current.push(markerDestination);
 
             const infoWindowDestination = new maps.InfoWindow({
               content: schools[index].name, // Display name in the info window

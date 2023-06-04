@@ -19,11 +19,12 @@ export default function Landing() {
   const [address, setAddress] = useState(
     "Hanzas perons, Hanzas iela, Vidzeme Suburb, Riga, Riga"
   );
+  const [allSchools, setAllSchools] = useState(null);
   const [filteredSchools, setFilteredSchools] = useState(null);
   const fetchSchoolsFromAPI = async () => {
     const response = await fetchSchools();
     console.log(response);
-    setFilteredSchools(response.data);
+    setAllSchools(response.data);
   };
 
   useEffect(() => {
@@ -42,15 +43,16 @@ export default function Landing() {
         <MapAutocomplete location={address} setLocation={setAddress} />
       </Box>
       <Box sx={{ mb: 3 }}>
-        {filteredSchools && (
+        {allSchools && (
           <Map
-            schools={filteredSchools}
+            schools={allSchools}
             setFilteredSchools={setFilteredSchools}
             origin={address}
             schoolRadius={2}
           />
         )}
       </Box>
+      {filteredSchools && filteredSchools.length === 0 && (<Typography>Šajā apkaimē skolas vēl netika pievienotas.</Typography>)}
       {filteredSchools && (
         <Box sx={{ mb: 2 }}>
           {filteredSchools.map((item) => (
