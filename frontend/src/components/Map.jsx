@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 
-const GoogleMapComponent = ({ schools, setFilteredSchools, origin }) => {
+const GoogleMapComponent = ({
+  schools,
+  setFilteredSchools,
+  origin,
+  schoolRadius,
+}) => {
   const destinations = schools.map((school) => school.address);
   const [googleApiObj, setIsGoogleApiLoadedObj] = useState(null);
   const [center, setCenter] = useState([56.95, 24.116667]);
@@ -33,10 +38,8 @@ const GoogleMapComponent = ({ schools, setFilteredSchools, origin }) => {
   };
 
   const filterSchoolsByDistanceRadius = (allSchools, maps, map) => {
-    const radius = 1000;
-
     const filteredSchools = allSchools.filter(
-      (school) => school.distance <= radius
+      (school) => school.distance <= schoolRadius
     );
     setFilteredSchools(filteredSchools);
     addSchoolMarkers(filteredSchools, maps, map);

@@ -19,7 +19,7 @@ export default function Landing() {
   const [address, setAddress] = useState(
     "Hanzas perons, Hanzas iela, Vidzeme Suburb, Riga, Riga"
   );
-  const [filteredSchools, setFilteredSchools] = useState([]);
+  const [filteredSchools, setFilteredSchools] = useState(null);
   const fetchSchoolsFromAPI = async () => {
     const response = await fetchSchools();
     console.log(response);
@@ -42,19 +42,22 @@ export default function Landing() {
         <MapAutocomplete location={address} setLocation={setAddress} />
       </Box>
       <Box sx={{ mb: 6 }}>
-        {filteredSchools.length > 0 && (
+        {filteredSchools && (
           <Map
             schools={filteredSchools}
             setFilteredSchools={setFilteredSchools}
             origin={address}
+            schoolRadius={2}
           />
         )}
       </Box>
-      <Box>
-        {filteredSchools.map((item) => (
-          <SchoolListItem school={item} key={item.id} />
-        ))}
-      </Box>
+      {filteredSchools && (
+        <Box>
+          {filteredSchools.map((item) => (
+            <SchoolListItem school={item} key={item.id} />
+          ))}
+        </Box>
+      )}
     </Box>
   );
 }
