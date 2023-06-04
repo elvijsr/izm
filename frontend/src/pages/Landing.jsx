@@ -41,7 +41,7 @@ export default function Landing() {
       <Box>
         <MapAutocomplete location={address} setLocation={setAddress} />
       </Box>
-      <Box sx={{ mb: 6 }}>
+      <Box sx={{ mb: 3 }}>
         {filteredSchools && (
           <Map
             schools={filteredSchools}
@@ -52,7 +52,7 @@ export default function Landing() {
         )}
       </Box>
       {filteredSchools && (
-        <Box>
+        <Box sx={{ mb: 2 }}>
           {filteredSchools.map((item) => (
             <SchoolListItem school={item} key={item.id} />
           ))}
