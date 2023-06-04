@@ -1,3 +1,4 @@
+import React from "react";
 import PlacesAutocomplete from "react-places-autocomplete";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -7,21 +8,25 @@ import IconButton from "@mui/material/IconButton";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const GoogleMapAutocomplete = ({ location, setLocation }) => {
+  const [address, setAddress] = React.useState(location);
+
   const handleChange = (value) => {
-    setLocation(value);
+    setAddress(value);
   };
 
   const handleSelect = async (value) => {
+    setAddress(value);
     setLocation(value);
   };
 
   const handleClear = () => {
+    setAddress("");
     setLocation("");
   };
 
   return (
     <PlacesAutocomplete
-      value={location}
+      value={address}
       onChange={handleChange}
       onSelect={handleSelect}
     >
