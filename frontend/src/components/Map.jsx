@@ -88,7 +88,7 @@ const GoogleMapComponent = ({ schools, setFilteredSchools, origin }) => {
             (element) => element.distance.text
           );
 
-          const durations = response.rows[0].elements.map(
+          const drivingDurations = response.rows[0].elements.map(
             (element) => element.duration.text
           );
 
@@ -96,14 +96,31 @@ const GoogleMapComponent = ({ schools, setFilteredSchools, origin }) => {
             parseFloat(dist.substring(0, dist.indexOf(" ")))
           );
 
-          const newSchools = schools.map((school, index) => ({
-            ...school,
-            distance: floatDistances[index],
-            duration: durations[index]
-          }));
-          console.log(JSON.stringify(newSchools));
+          distanceService.getDistanceMatrix(
+            {
+              origins: [origin],
+              destinations: destinations,
+              travelMode: maps.TravelMode.WALKING,
+            },
+            (response, status) => {
+              if (status === maps.DistanceMatrixStatus.OK) {
+                const walkingDurations = response.rows[0].elements.map(
+                  (element) => element.duration.text
+                );
 
-          filterSchoolsByDistanceRadius(newSchools, maps, map);
+                const newSchools = schools.map((school, index) => ({
+                  ...school,
+                  distance: floatDistances[index],
+                  duration: drivingDurations[index],
+                  walkingDuration: walkingDurations[index],
+                }));
+
+                filterSchoolsByDistanceRadius(newSchools, maps, map);
+              } else {
+                console.error("Error fetching distance", status);
+              }
+            }
+          );
         } else {
           console.error("Error fetching distance", status);
         }
