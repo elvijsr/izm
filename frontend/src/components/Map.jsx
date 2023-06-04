@@ -19,7 +19,7 @@ const GoogleMapComponent = ({
       calculateDistance(map, maps);
       transformOrigin(origin, maps);
     }
-  }, [googleApiObj, origin]);
+  }, [googleApiObj, origin, schoolRadius]);
 
   const transformOrigin = (origin, maps) => {
     const geocoder = new maps.Geocoder();
