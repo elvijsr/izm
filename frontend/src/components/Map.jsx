@@ -1,87 +1,84 @@
 import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
-import skolas from "../assets/skolas.json"; // Import the skolas.json file
 
-const GoogleMapComponent = () => {
-  const [distance, setDistance] = useState("");
+const GoogleMapComponent = ({ schools, setFilteredSchools }) => {
+  const [distance, setDistance] = useState([]);
   const origin = "KRIŠJĀŅA BARONA IELA 25 - 36";
-  const destination = skolas.map((skola) => skola.address); // Get addresses from skolas.json
+  const destinations = schools.map((school) => school.address);
+
+  const filterSchoolsByDistanceRadius = (allSchools, maps, map) => {
+    const radius = 1;
+
+    const filteredSchools = allSchools.filter(
+      (school) => school.distance <= radius
+    );
+    setFilteredSchools(filteredSchools);
+    addSchoolMarkers(filteredSchools, maps, map);
+  };
+
+  const addSchoolMarkers = (filteredSchools, maps, map) => {
+    const geocoder = new maps.Geocoder();
+    const destinations = filteredSchools.map((school) => school.address);
+
+    destinations.forEach((destinationAddress, index) => {
+      geocoder.geocode(
+        { address: destinationAddress },
+        (destinationResults, destinationStatus) => {
+          if (destinationStatus === "OK") {
+            const destinationLatLng = destinationResults[0].geometry.location;
+            const markerDestination = new maps.Marker({
+              position: destinationLatLng,
+              map: map,
+              label: "D",
+            });
+
+            const infoWindowDestination = new maps.InfoWindow({
+              content: schools[index].name, // Display name in the info window
+            });
+
+            markerDestination.addListener("click", () => {
+              infoWindowDestination.open(map, markerDestination);
+            });
+          } else {
+            console.error("Error geocoding destination:", destinationStatus);
+          }
+        }
+      );
+    });
+  };
 
   const calculateDistance = (map, maps) => {
-    const geocoder = new maps.Geocoder();
-
-    geocoder.geocode({ address: origin }, (originResults, originStatus) => {
-      if (originStatus === "OK") {
-        const originLatLng = originResults[0].geometry.location;
-        const markerOrigin = new maps.Marker({
-          position: originLatLng,
-          map: map,
-          label: "O",
-        });
-
-        const infoWindowOrigin = new maps.InfoWindow({
-          content: origin,
-        });
-        markerOrigin.addListener("click", () => {
-          infoWindowOrigin.open(map, markerOrigin);
-        });
-
-        destination.forEach((destinationAddress, index) => {
-          geocoder.geocode(
-            { address: destinationAddress },
-            (destinationResults, destinationStatus) => {
-              if (destinationStatus === "OK") {
-                const destinationLatLng =
-                  destinationResults[0].geometry.location;
-                const markerDestination = new maps.Marker({
-                  position: destinationLatLng,
-                  map: map,
-                  label: "D",
-                });
-
-                const infoWindowDestination = new maps.InfoWindow({
-                  content: skolas[index].name, // Display name in the info window
-                });
-
-                // Remove the line that opens the info window by default
-
-                markerDestination.addListener("click", () => {
-                  infoWindowDestination.open(map, markerDestination);
-                });
-
-                const distanceService = new maps.DistanceMatrixService();
-                distanceService.getDistanceMatrix(
-                  {
-                    origins: [originLatLng],
-                    destinations: [destinationLatLng],
-                    travelMode: maps.TravelMode.DRIVING,
-                  },
-                  (response, status) => {
-                    if (status === maps.DistanceMatrixStatus.OK) {
-                      const newDistance = response.rows[0].elements[0].distance;
-                      setDistance((prevDistance) =>
-                        prevDistance
-                          ? prevDistance + ", " + newDistance.text
-                          : newDistance.text
-                      );
-                    } else {
-                      console.error("Error fetching distance", status);
-                    }
-                  }
-                );
-              } else {
-                console.error(
-                  "Error geocoding destination:",
-                  destinationStatus
-                );
-              }
-            }
+    const distanceService = new maps.DistanceMatrixService();
+    distanceService.getDistanceMatrix(
+      {
+        origins: [origin],
+        destinations: destinations,
+        travelMode: maps.TravelMode.DRIVING,
+      },
+      (response, status) => {
+        if (status === maps.DistanceMatrixStatus.OK) {
+          const distances = response.rows[0].elements.map(
+            (element) => element.distance.text
           );
-        });
-      } else {
-        console.error("Error geocoding origin:", originStatus);
+
+          const floatDistances = distances.map((dist) =>
+            parseFloat(dist.substring(0, dist.indexOf(" ")))
+          );
+
+          const newSchools = schools.map((school, index) => ({
+            ...school,
+            distance: floatDistances[index],
+          }));
+          console.log(JSON.stringify(newSchools));
+
+          filterSchoolsByDistanceRadius(newSchools, maps, map);
+
+          setDistance(distances);
+        } else {
+          console.error("Error fetching distance", status);
+        }
       }
-    });
+    );
   };
 
   return (

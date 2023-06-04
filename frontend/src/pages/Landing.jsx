@@ -23,10 +23,7 @@ export default function Landing() {
   const fetchSchoolsFromAPI = async () => {
     const response = await fetchSchools();
     console.log(response);
-    const filtered = response.data.filter((school) =>
-      school.address.toLowerCase().includes(address.toLowerCase())
-    );
-    setFilteredSchools(filtered);
+    setFilteredSchools(response.data);
   };
 
   useEffect(() => {
@@ -45,7 +42,12 @@ export default function Landing() {
         <MapAutocomplete location={address} setLocation={setAddress} />
       </Box>
       <Box sx={{ mb: 6 }}>
-        <Map />
+        {filteredSchools.length > 0 && (
+          <Map
+            schools={filteredSchools}
+            setFilteredSchools={setFilteredSchools}
+          />
+        )}
       </Box>
       <Box>
         {filteredSchools.map((item) => (
