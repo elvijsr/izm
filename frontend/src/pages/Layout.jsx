@@ -15,10 +15,8 @@ export default function Layout() {
   //   }
   // }, []);
   return (
-    <Box>
-      <ResponsiveDrawer>
-        <Outlet />
-      </ResponsiveDrawer>
-    </Box>
+    <ResponsiveDrawer>
+      <Outlet />
+    </ResponsiveDrawer>
   );
 }
