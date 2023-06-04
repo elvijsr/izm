@@ -5,28 +5,38 @@ import {
   Grid,
   Button,
   TextField,
+  ListItemButton,
+  ListItemText,
+  Link,
 } from "@mui/material";
+import SchoolListItem from "../components/SchoolListItem";
 import { useEffect, useState } from "react";
 import testFetch from "../services/testFetch";
+import schoolList from "../assets/skolas.json";
 
 export default function Landing() {
   const [address, setAddress] = useState("Tallinas 69");
-
+  const [filteredSchools, setFilteredSchools] = useState(schoolList);
   const fetch = async () => {
     const response = await testFetch();
     console.log(response);
   };
 
   useEffect(() => {
+    const filtered = schoolList.filter((school) =>
+      school.address.toLowerCase().includes(address.toLowerCase())
+    );
+    setFilteredSchools(filtered);
+
     fetch();
-  }, []);
+  }, [address]);
   return (
-    <Container
+    <Box
       sx={{
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        gap: 5,
+        gap: 3,
       }}
     >
       <Box>
@@ -38,6 +48,11 @@ export default function Landing() {
           fullWidth
         />
       </Box>
-    </Container>
+      <Box>
+        {filteredSchools.map((item) => (
+          <SchoolListItem school={item} key={item.id} />
+        ))}
+      </Box>
+    </Box>
   );
 }

@@ -11,6 +11,12 @@ dependencies:
   '@emotion/styled':
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.0)(@types/react@18.0.37)(react@18.2.0)
+  '@fontsource/outfit':
+    specifier: ^5.0.2
+    version: 5.0.2
+  '@fontsource/roboto':
+    specifier: ^5.0.2
+    version: 5.0.2
   '@mui/icons-material':
     specifier: ^5.11.16
     version: 5.11.16(@mui/material@5.13.3)(@types/react@18.0.37)(react@18.2.0)
@@ -643,6 +649,14 @@ packages:
     resolution: {integrity: sha512-IoD2MfUnOV58ghIHCiil01PcohxjbYR/qCxsoC+xNgUwh1EY8jOOrYmu3d3a71+tJJ23uscEV4X2HJWMsPJu4g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@fontsource/outfit@5.0.2:
+    resolution: {integrity: sha512-fMaijElPderiMB6gA5R7A2oMOcDof4vVlbp9Zuv0x4f8mX9OFvSXkku8Vu2C7VoeV/KxrajZXm9iy5dmG7C7cQ==}
+    dev: false
+
+  /@fontsource/roboto@5.0.2:
+    resolution: {integrity: sha512-SLw0o3kWwJ53/Ogyk8GGwSaULNX6Hogs+GsVempDdqpX8wm5hKBLYgUkdUPk+NogiViPp1x++OnkuLA+fAd9Kg==}
+    dev: false
 
   /@humanwhocodes/config-array@0.11.10:
     resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}

@@ -8,6 +8,11 @@ import Layout from "./pages/Layout.jsx";
 import ErrorPage from "./pages/errorPage.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import "@fontsource/outfit/300.css";
+import "@fontsource/outfit/400.css";
+import "@fontsource/outfit/500.css";
+import "@fontsource/outfit/700.css";
+
 const theme = createTheme({
   palette: {
     mode: "light",
@@ -26,6 +31,7 @@ const theme = createTheme({
   },
   typography: {
     color: "#000000",
+    fontFamily: "Outfit",
   },
 });
 

@@ -1,0 +1,232 @@
+[
+  {
+    "id": 1,
+    "name": "Rīgas 1. pamatskola-attīstības centrs",
+    "address": "ĢERTRŪDES IELA 18, CENTRA RAJONS, RĪGA, LV-1011",
+    "web": "",
+    "phone": "67294164, 67294064",
+    "email": "r1ps@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā sākumskola"
+  },
+  {
+    "id": 2,
+    "name": "Rīgas Valda Zālīša sākumskola",
+    "address": "KALPAKA BULVĀRIS 8, CENTRA RAJONS, RĪGA, LV-1050",
+    "web": "http://www.zalisaskola.lv/",
+    "phone": "67474306, 67474307",
+    "email": "vzsk@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā sākumskola"
+  },
+  {
+    "id": 3,
+    "name": "Rīgas Centra daiļamatniecības pamatskola",
+    "address": "ASPAZIJAS BULVĀRIS 34, CENTRA RAJONS, RĪGA, LV-1050",
+    "web": "http://www.rcdp.lv/",
+    "phone": "67227548, 67226324",
+    "email": "cdps@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā pamatskola"
+  },
+  {
+    "id": 4,
+    "name": "Rīgas Natālijas Draudziņas vidusskola",
+    "address": "BRUŅINIEKU IELA 24a, CENTRA RAJONS, RĪGA, LV-1001",
+    "web": "http://www.ndv.lv/",
+    "phone": 67278063,
+    "email": "rndv@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā vidusskola"
+  },
+  {
+    "id": 5,
+    "name": "Rīgas Valsts 3. ģimnāzija",
+    "address": "GRĒCINIEKU IELA 10, CENTRA RAJONS, RĪGA, LV-1050",
+    "web": "www.r3g.lv/",
+    "phone": 67037408,
+    "email": "r3g@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Valsts ģimnāzija"
+  },
+  {
+    "id": 6,
+    "name": "Rīgas Valsts 1. ģimnāzija",
+    "address": "RAIŅA BULVĀRIS 8, CENTRA RAJONS, RĪGA, LV-1050",
+    "web": "www.r1g.edu.lv",
+    "phone": 67227412,
+    "email": "rv1g@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Valsts ģimnāzija"
+  },
+  {
+    "id": 7,
+    "name": "Rīgas 40. vidusskola",
+    "address": "TĒRBATAS IELA 15/17, CENTRA RAJONS, RĪGA, LV-1011",
+    "web": "https://www.r40vsk.lv/lv/",
+    "phone": "67114908, 67114909",
+    "email": "r40vs@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā vidusskola"
+  },
+  {
+    "id": 8,
+    "name": "Pamatskola \"Rīdze",
+    "address": "KRIŠJĀŅA VALDEMĀRA IELA 2, CENTRA RAJONS, RĪGA, LV-1010",
+    "web": "www.ridze.lv",
+    "phone": 67848044,
+    "email": "ridzeps@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā pamatskola"
+  },
+  {
+    "id": 9,
+    "name": "Tālmācības vidusskola \"Rīgas 1. vidusskola",
+    "address": "AUDĒJU IELA 8 - 3, CENTRA RAJONS, RĪGA, LV-1050",
+    "web": "www.vidusskola.com",
+    "phone": 28310100,
+    "email": "skola@vidusskola.com",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Neklātienes vidusskola"
+  },
+  {
+    "id": 10,
+    "name": "Privātā vidusskola \"Citruss",
+    "address": "VECĀ BIĶERNIEKU IELA 41 - 5, VIDZEMES PRIEKŠPILSĒTA, RĪGA, LV-1079",
+    "web": "",
+    "phone": 29799290,
+    "email": "skola@citruss.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā vidusskola"
+  },
+  {
+    "id": 11,
+    "name": "Rīgas Raiņa vidusskola",
+    "address": "KRIŠJĀŅA BARONA IELA 71, CENTRA RAJONS, RĪGA, LV-1001",
+    "web": "www.rskola.lv",
+    "phone": 67311546,
+    "email": "rrainavsk@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā vidusskola"
+  },
+  {
+    "id": 12,
+    "name": "Rīgas Centra pamatskola",
+    "address": "ARTILĒRIJAS IELA 34, LATGALES PRIEKŠPILSĒTA, RĪGA, LV-1009",
+    "web": "",
+    "phone": 29150128,
+    "email": "info@bernudarzs.eu",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā pamatskola"
+  },
+  {
+    "id": 13,
+    "name": "Privātā vidusskola \"INNOVA",
+    "address": "KRIŠJĀŅA BARONA IELA 130 K-4, CENTRA RAJONS, RĪGA, LV-1012",
+    "web": "www.experiment.lv",
+    "phone": 20379720,
+    "email": "news@experiment.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā vidusskola"
+  },
+  {
+    "id": 14,
+    "name": "Rīgas Centra humanitārā vidusskola",
+    "address": "KRIŠJĀŅA BARONA IELA 97A, CENTRA RAJONS, RĪGA, LV-1012",
+    "web": "www.rchv.lv",
+    "phone": 67474239,
+    "email": "chvs@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā vidusskola"
+  },
+  {
+    "id": 15,
+    "name": "Privātā Rīgas Tehnolingvistiskā ģimnāzija",
+    "address": "ĢERTRŪDES IELA 27, CENTRA RAJONS, RĪGA, LV-1011",
+    "web": "rtlg.lv",
+    "phone": 25135313,
+    "email": "direktors@rtlg.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā vidusskola"
+  },
+  {
+    "id": 16,
+    "name": "Privātā vidusskola \"Patnis",
+    "address": "GREGORA IELA 13a, KURZEMES RAJONS, RĪGA, LV-1046",
+    "web": "www.patnis.lv",
+    "phone": "67622161, 67615743, 26546854",
+    "email": "patnis@patnis.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā vidusskola"
+  },
+  {
+    "id": 17,
+    "name": "Rīgas 22. vidusskola",
+    "address": "BRUŅINIEKU IELA 10, CENTRA RAJONS, RĪGA, LV-1001",
+    "web": "https://r22vsk.lv",
+    "phone": 67272126,
+    "email": "r22vs@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā vidusskola"
+  },
+  {
+    "id": 18,
+    "name": "Tālmācības vidusskola \"IZI",
+    "address": "AUDĒJU IELA 8 - 3, CENTRA RAJONS, RĪGA, LV-1050",
+    "web": "www.izi.lv",
+    "phone": 26525233,
+    "email": "",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Neklātienes vidusskola"
+  },
+  {
+    "id": 19,
+    "name": "Kristīgā pamatskola \"Ceļš",
+    "address": "ALFRĒDA KALNIŅA IELA 1 - 8, CENTRA RAJONS, RĪGA, LV-1050",
+    "web": "www.ksc.lv",
+    "phone": 26535522,
+    "email": "info@ksc.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā pamatskola"
+  },
+  {
+    "id": 20,
+    "name": "Privātā pamatskola DOMDARIS",
+    "address": "BRĪVĪBAS IELA 104, CENTRA RAJONS, RĪGA, LV-1001",
+    "web": "",
+    "phone": 26545141,
+    "email": "info@domdaris.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā pamatskola"
+  },
+  {
+    "id": 21,
+    "name": "Informācijas tehnoloģiju tālmācības vidusskola",
+    "address": "STABU IELA 24, CENTRA RAJONS, RĪGA, LV-1011",
+    "web": "",
+    "phone": 29234545,
+    "email": "nfo@itskola.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Neklātienes vidusskola"
+  },
+  {
+    "id": 22,
+    "name": "Starptautiskā CIDESCO kosmetoloģijas profesionālā vidusskola",
+    "address": "TALLINAS IELA 18, LATGALES PRIEKŠPILSĒTA, RĪGA, LV-1001",
+    "web": "www.kosmetikasskola.lv",
+    "phone": 28388520,
+    "email": "info@kosmetikasskola.lv",
+    "type": "Profesionālās pamata un vidējās izglītības iestāde",
+    "sub_type": "Profesionālā vidusskola"
+  },
+  {
+    "id": 23,
+    "name": "Rīgas sākumskola \"Valodiņa",
+    "address": "KRIŠJĀŅA BARONA IELA 25 - 36, CENTRA RAJONS, RĪGA, LV-1011",
+    "web": "www.valodina.lv",
+    "phone": "67848880, 67848877",
+    "email": "rvalsk@riga.lv",
+    "type": "Vispārējās izglītības iestāde",
+    "sub_type": "Vispārizglītojošā sākumskola"
+  }
+]
