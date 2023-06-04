@@ -39,8 +39,8 @@ export default function Landing() {
       label: "1 km",
     },
     {
-      value: 5,
-      label: "5 km",
+      value: 10,
+      label: "10 km",
     },
   ];
 
@@ -85,7 +85,7 @@ export default function Landing() {
           marks
           step={1}
           min={1}
-          max={5}
+          max={10}
         />
       </Box>
       {filteredSchools && (
