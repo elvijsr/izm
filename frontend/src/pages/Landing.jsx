@@ -16,7 +16,7 @@ import schoolList from "../assets/skolas.json";
 import Map from "../components/Map";
 
 export default function Landing() {
-  const [address, setAddress] = useState("Tallinas 69");
+  const [address, setAddress] = useState("");
   const [filteredSchools, setFilteredSchools] = useState(schoolList);
   const fetch = async () => {
     const response = await testFetch();
@@ -49,7 +49,7 @@ export default function Landing() {
           fullWidth
         />
       </Box>
-      <Box sx={{ mb: 5 }}>
+      <Box sx={{ mb: 6 }}>
         <Map />
       </Box>
       <Box>
