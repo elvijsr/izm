@@ -55,6 +55,7 @@ export default function SchoolListItem(props) {
 
   return (
     <Accordion
+      sx={{ borderRadius: 5, border: expanded ? "1px solid lightgrey" : "" }}
       elevation={0}
       expanded={expanded === props.school.id}
       onChange={handleAccordionExpansion(props.school.id)}
