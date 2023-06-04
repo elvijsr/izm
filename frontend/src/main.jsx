@@ -12,6 +12,7 @@ import "@fontsource/outfit/300.css";
 import "@fontsource/outfit/400.css";
 import "@fontsource/outfit/500.css";
 import "@fontsource/outfit/700.css";
+import { red, green } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
@@ -24,6 +25,12 @@ const theme = createTheme({
     },
     tetriary: {
       main: "#4389A2",
+    },
+    alert: {
+      main: red[200],
+    },
+    success: {
+      main: green[200],
     },
     text: {
       body: "#FFFFFF",

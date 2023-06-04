@@ -22,6 +22,8 @@ import OpenInNew from "@mui/icons-material/OpenInNew";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import GroupIcon from "@mui/icons-material/Group";
+import { useTheme } from "@mui/material/styles";
 import * as React from "react";
 
 export default function SchoolListItem(props) {
@@ -48,6 +50,8 @@ export default function SchoolListItem(props) {
     setOpen(!open);
   };
 
+  const theme = useTheme();
+
   return (
     <Accordion
       elevation={0}
@@ -70,59 +74,122 @@ export default function SchoolListItem(props) {
               ? props.school.address
               : cutTextAfterSecondComma(props.school.address)}
           </Typography>
-          <Box>
+          <Box sx={{ gap: 1, display: expanded ? "none" : "flex" }}>
             <Chip
               label={`OCE: ${(props.school.oce_index_21 * 100).toFixed(2)}%`}
             />
+            <Chip
+              sx={{
+                backgroundColor:
+                  props.school.oce_index_21 - props.school.oce_index_20 > 0
+                    ? theme.palette.success.main
+                    : theme.palette.alert.main,
+              }}
+              label={`${(
+                (props.school.oce_index_21 - props.school.oce_index_20) *
+                100
+              ).toFixed(2)}%`}
+            />
+            <Chip icon={<GroupIcon />} label={props.school.pupil_count} />
           </Box>
         </Box>
       </AccordionSummary>
       <AccordionDetails>
-        <Box>
-          <Typography>Interešu izglītība</Typography>
-          <Typography>{props.school.interests}</Typography>
+        <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
+          <Typography>Cilvēku skaits:</Typography>
+          <Typography sx={{ fontWeight: "500" }}>
+            {props.school.pupil_count}
+          </Typography>
         </Box>
         <List>
-          <ListItem onClick={handleClick}>
+          <ListItem onClick={handleClick} sx={{ gap: 1 }}>
             <ListItemText>
               <Typography sx={{ fontWeight: "700" }}>OCE indekss:</Typography>
             </ListItemText>
             <Typography>
               {(props.school.oce_index_21 * 100).toFixed(2)}%
             </Typography>
+            <Chip
+              sx={{
+                backgroundColor:
+                  props.school.oce_index_21 - props.school.oce_index_20 > 0
+                    ? theme.palette.success.main
+                    : theme.palette.alert.main,
+              }}
+              label={`${(
+                (props.school.oce_index_21 - props.school.oce_index_20) *
+                100
+              ).toFixed(2)}%`}
+            />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItem>
+              <ListItem sx={{ gap: 1 }}>
                 <ListItemText>
                   <Typography sx={{ fontWeight: "500" }}>
-                    OCE Latviešu valoda:
+                    Latviešu valoda:
                   </Typography>
                 </ListItemText>
                 <Typography>
                   {(props.school.oce_latv_21 * 100).toFixed(2)}%
                 </Typography>
+                <Chip
+                  sx={{
+                    backgroundColor:
+                      props.school.oce_latv_21 - props.school.oce_latv_20 > 0
+                        ? theme.palette.success.main
+                        : theme.palette.alert.main,
+                  }}
+                  label={`${(
+                    (props.school.oce_latv_21 - props.school.oce_latv_20) *
+                    100
+                  ).toFixed(2)}%`}
+                />
               </ListItem>
-              <ListItem>
+              <ListItem sx={{ gap: 1 }}>
                 <ListItemText>
                   <Typography sx={{ fontWeight: "500" }}>
-                    OCE Matemātika:
+                    Matemātika:
                   </Typography>
                 </ListItemText>
                 <Typography>
                   {(props.school.oce_math_21 * 100).toFixed(2)}%
                 </Typography>
+                <Chip
+                  sx={{
+                    backgroundColor:
+                      props.school.oce_math_21 - props.school.oce_math_20 > 0
+                        ? theme.palette.success.main
+                        : theme.palette.alert.main,
+                  }}
+                  label={`${(
+                    (props.school.oce_math_21 - props.school.oce_math_20) *
+                    100
+                  ).toFixed(2)}%`}
+                />
               </ListItem>
-              <ListItem>
+              <ListItem sx={{ gap: 1 }}>
                 <ListItemText>
                   <Typography sx={{ fontWeight: "500" }}>
-                    OCE Svešvaloda:
+                    Svešvaloda:
                   </Typography>
                 </ListItemText>
                 <Typography>
                   {(props.school.oce_sves_21 * 100).toFixed(2)}%
                 </Typography>
+                <Chip
+                  sx={{
+                    backgroundColor:
+                      props.school.oce_sves_21 - props.school.oce_sves_20 > 0
+                        ? theme.palette.success.main
+                        : theme.palette.alert.main,
+                  }}
+                  label={`${(
+                    (props.school.oce_sves_21 - props.school.oce_sves_20) *
+                    100
+                  ).toFixed(2)}%`}
+                />
               </ListItem>
             </List>
           </Collapse>
