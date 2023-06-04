@@ -1,17 +1,13 @@
 import {
   Typography,
   Box,
-  IconButton,
-  Button,
   Chip,
   Link,
   List,
   ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
   Collapse,
-  Alert,
 } from "@mui/material";
 
 import Accordion from "@mui/material/Accordion";
@@ -23,16 +19,13 @@ import OpenInNew from "@mui/icons-material/OpenInNew";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import GroupIcon from "@mui/icons-material/Group";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MapIcon from "@mui/icons-material/Map";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import Snackbar from "@mui/material/Snackbar";
-import CloseIcon from "@mui/icons-material/Close";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
 import { useTheme } from "@mui/material/styles";
 import * as React from "react";
-import { useEffect } from "react";
 
 export default function SchoolListItem(props) {
   function cutTextAfterSecondComma(inputText) {
@@ -92,16 +85,24 @@ export default function SchoolListItem(props) {
             />
             <Chip
               size="small"
+              icon={<ShowChartIcon />}
               sx={{
                 backgroundColor:
                   props.school.oce_index_21 - props.school.oce_index_20 > 0
                     ? theme.palette.success.main
                     : theme.palette.alert.main,
               }}
-              label={`${(
-                (props.school.oce_index_21 - props.school.oce_index_20) *
-                100
-              ).toFixed(2)}%`}
+              label={
+                props.school.oce_index_21 - props.school.oce_index_20 > 0
+                  ? `+${(
+                      (props.school.oce_index_21 - props.school.oce_index_20) *
+                      100
+                    ).toFixed(2)}%`
+                  : `${(
+                      (props.school.oce_index_21 - props.school.oce_index_20) *
+                      100
+                    ).toFixed(2)}%`
+              }
             />
             <Chip
               icon={<MapIcon />}
@@ -121,12 +122,22 @@ export default function SchoolListItem(props) {
               {props.school.distance + " km"}
             </Typography>
             <Typography
-              sx={{ display: "flex", fontWeight: "500", alignItems: "center" }}
+              sx={{
+                display: "flex",
+                fontWeight: "500",
+                alignItems: "center",
+                gap: 1,
+              }}
             >
               <Chip
                 size="small"
                 icon={<DirectionsCarIcon />}
                 label={props.school.duration}
+              />
+              <Chip
+                size="small"
+                icon={<DirectionsWalkIcon />}
+                label={props.school.walkingDuration}
               />
             </Typography>
           </ListItem>
@@ -140,16 +151,24 @@ export default function SchoolListItem(props) {
             </Typography>
             <Chip
               size="small"
+              icon={<ShowChartIcon />}
               sx={{
                 backgroundColor:
                   props.school.oce_index_21 - props.school.oce_index_20 > 0
                     ? theme.palette.success.main
                     : theme.palette.alert.main,
               }}
-              label={`${(
-                (props.school.oce_index_21 - props.school.oce_index_20) *
-                100
-              ).toFixed(2)}%`}
+              label={
+                props.school.oce_index_21 - props.school.oce_index_20 > 0
+                  ? `+${(
+                      (props.school.oce_index_21 - props.school.oce_index_20) *
+                      100
+                    ).toFixed(2)}%`
+                  : `${(
+                      (props.school.oce_index_21 - props.school.oce_index_20) *
+                      100
+                    ).toFixed(2)}%`
+              }
             />
           </ListItem>
           <Collapse in={oceExpanded} timeout="auto" unmountOnExit>
