@@ -1,13 +1,40 @@
 import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 
-const GoogleMapComponent = ({ schools, setFilteredSchools }) => {
+const GoogleMapComponent = ({ schools, setFilteredSchools, origin }) => {
   const [distance, setDistance] = useState([]);
-  const origin = "KRIŠJĀŅA BARONA IELA 25 - 36";
   const destinations = schools.map((school) => school.address);
+  const [googleApiObj, setIsGoogleApiLoadedObj] = useState(null);
+  const [center, setCenter] = useState([56.95, 24.116667]);
+
+  useEffect(() => {
+    if (googleApiObj) {
+      const { map, maps } = googleApiObj;
+      // or else call that isApiLoaded function and pass-on these arguments
+      calculateDistance(map, maps);
+      transformOrigin(origin, maps);
+    }
+  }, [googleApiObj, origin]);
+
+  const transformOrigin = (origin, maps) => {
+    const geocoder = new maps.Geocoder();
+
+    geocoder.geocode(
+      { address: origin },
+      (destinationResults, destinationStatus) => {
+        if (destinationStatus === "OK") {
+          const {lat, lng} = destinationResults[0].geometry.location;
+          const originGeocodeAsArray = [lat(), lng()];
+          setCenter(originGeocodeAsArray);
+        } else {
+          console.error("Error geocoding destination:", destinationStatus);
+        }
+      }
+    );
+  };
 
   const filterSchoolsByDistanceRadius = (allSchools, maps, map) => {
-    const radius = 1;
+    const radius = 1000;
 
     const filteredSchools = allSchools.filter(
       (school) => school.distance <= radius
@@ -48,6 +75,7 @@ const GoogleMapComponent = ({ schools, setFilteredSchools }) => {
   };
 
   const calculateDistance = (map, maps) => {
+    console.log(origin);
     const distanceService = new maps.DistanceMatrixService();
     distanceService.getDistanceMatrix(
       {
@@ -86,9 +114,15 @@ const GoogleMapComponent = ({ schools, setFilteredSchools }) => {
       <GoogleMapReact
         bootstrapURLKeys={{ key: import.meta.env.VITE_MAPS_API_KEY }}
         defaultCenter={{ lat: 56.95, lng: 24.116667 }}
-        defaultZoom={12}
+        center={center}
+        defaultZoom={13}
         yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map, maps }) => calculateDistance(map, maps)}
+        onGoogleApiLoaded={({ map, maps }) =>
+          setIsGoogleApiLoadedObj({
+            map,
+            maps,
+          })
+        }
       ></GoogleMapReact>
       <p>Distance: {distance}</p>
     </div>

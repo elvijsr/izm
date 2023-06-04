@@ -46,6 +46,7 @@ export default function Landing() {
           <Map
             schools={filteredSchools}
             setFilteredSchools={setFilteredSchools}
+            origin={address}
           />
         )}
       </Box>
