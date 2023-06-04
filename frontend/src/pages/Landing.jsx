@@ -13,9 +13,12 @@ import SchoolListItem from "../components/SchoolListItem";
 import { useEffect, useState } from "react";
 import fetchSchools from "../services/fetchSchools";
 import Map from "../components/Map";
+import MapAutocomplete from "../components/MapAutoComplete";
 
 export default function Landing() {
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(
+    "Hanzas perons, Hanzas iela, Vidzeme Suburb, Riga, Riga"
+  );
   const [filteredSchools, setFilteredSchools] = useState([]);
   const fetchSchoolsFromAPI = async () => {
     const response = await fetchSchools();
@@ -28,7 +31,7 @@ export default function Landing() {
 
   useEffect(() => {
     fetchSchoolsFromAPI();
-  }, [address]);
+  }, []);
   return (
     <Box
       sx={{
@@ -39,13 +42,7 @@ export default function Landing() {
       }}
     >
       <Box>
-        <TextField
-          label="Ievadi adresi"
-          value={address}
-          variant="outlined"
-          onChange={({ target }) => setAddress(target.value)}
-          fullWidth
-        />
+        <MapAutocomplete location={address} setLocation={setAddress} />
       </Box>
       <Box sx={{ mb: 6 }}>
         <Map />
