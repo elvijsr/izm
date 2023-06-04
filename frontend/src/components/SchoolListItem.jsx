@@ -24,6 +24,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import GroupIcon from "@mui/icons-material/Group";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import MapIcon from "@mui/icons-material/Map";
 import { useTheme } from "@mui/material/styles";
 import * as React from "react";
 
@@ -38,7 +39,6 @@ export default function SchoolListItem(props) {
     }
     return inputText;
   }
-
   const [expanded, setExpanded] = React.useState(false);
 
   const handleAccordionExpansion = (panel) => (event, isExpanded) => {
@@ -68,9 +68,15 @@ export default function SchoolListItem(props) {
           >
             {props.school.name}
           </Typography>
-          <Typography variant="subtitle2" sx={{ color: "#4F4F4F" }}>
-            {props.school.sub_type}
-          </Typography>
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <Typography variant="subtitle2" sx={{ color: "#4F4F4F" }}>
+              {props.school.sub_type}
+            </Typography>
+            <Typography>•</Typography>
+            <Typography variant="subtitle2" sx={{ color: "#4F4F4F" }}>
+              {props.school.pupil_count} skolēni
+            </Typography>
+          </Box>
           <Box sx={{ gap: 1, display: expanded ? "none" : "flex" }}>
             <Chip
               size="small"
@@ -90,21 +96,23 @@ export default function SchoolListItem(props) {
               ).toFixed(2)}%`}
             />
             <Chip
+              icon={<MapIcon />}
               size="small"
-              icon={<GroupIcon />}
-              label={props.school.pupil_count}
+              label={`${props.school.distance} km`}
             />
           </Box>
         </Box>
       </AccordionSummary>
       <AccordionDetails>
-        <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-          <Typography>Cilvēku skaits:</Typography>
-          <Typography sx={{ fontWeight: "500" }}>
-            {props.school.pupil_count}
-          </Typography>
-        </Box>
         <List>
+          <ListItem>
+            <ListItemText>
+              <Typography sx={{ fontWeight: "700" }}>Attālums</Typography>
+            </ListItemText>
+            <Typography sx={{ fontWeight: "500" }}>
+              {props.school.distance + " km"}
+            </Typography>
+          </ListItem>
           <ListItem onClick={handleClick} sx={{ gap: 1 }}>
             {open ? <ExpandLess /> : <ExpandMore />}
             <ListItemText>
