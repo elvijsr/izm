@@ -95,27 +95,28 @@ function ResponsiveDrawer(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex", width: "100%" }}>
+    <Box sx={{ width: "100%" }}>
       <AppBar
-        position="fixed"
+        position="static"
         sx={{
-          display: { sm: "none" },
+          backgroundColor: "transparent",
+          boxShadow: "none",
         }}
       >
-        <Toolbar sx={{ alignItems: "center" }}>
-          <IconButton
+        <Toolbar sx={{ alignItems: "center", justifyContent: "center" }}>
+          {/* <IconButton
             color="secondary"
             aria-label=""
             onClick={handleDrawerToggle}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography
               variant="h5"
               sx={{ fontWeight: 700 }}
               component="div"
-              color="#FFFFFF"
+              color="#B15CF4"
             >
               SkoluRadars
             </Typography>
@@ -125,12 +126,11 @@ function ResponsiveDrawer(props) {
           </Avatar>
         </Toolbar>
       </AppBar>
-      <Box
+      {/* <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
@@ -162,14 +162,12 @@ function ResponsiveDrawer(props) {
         >
           {drawer}
         </Drawer>
-      </Box>
+      </Box> */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           py: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          mt: { xs: 7, sm: 1 },
           height: "100vh",
           display: "flex",
           alignItems: "flex-start",
