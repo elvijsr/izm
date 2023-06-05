@@ -9,6 +9,7 @@ import {
   ListItemText,
   Link,
   Slider,
+  Collapse,
   Switch,
 } from "@mui/material";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -20,8 +21,10 @@ import Chip from "@mui/material/Chip";
 import SchoolListItem from "../components/SchoolListItem";
 import { useEffect, useState } from "react";
 import fetchSchools from "../services/fetchSchools";
+import FilterListIcon from "@mui/icons-material/FilterList";
 import Map from "../components/Map";
 import MapAutocomplete from "../components/MapAutoComplete";
+import { useTheme } from "@mui/material/styles";
 
 export default function Landing() {
   const [address, setAddress] = useState(
@@ -31,6 +34,7 @@ export default function Landing() {
   const [filteredSchools, setFilteredSchools] = useState(null);
   const [doubleFilteredSchools, setDoubleFilteredSchools] = useState(null);
   const [radiusFilter, setRadiusFilter] = useState(2);
+  const theme = useTheme();
 
   const getUniqueInterestTags = (data) => {
     const tagsSet = new Set(); // Using a Set to ensure unique values
@@ -82,7 +86,7 @@ export default function Landing() {
 
   const [interestTagsSelected, setInterestTagsSelected] = useState([]);
   const [interestTagsList, setInterestTagsList] = useState([]);
-  const [minOCE, setMinOCE] = useState(0);
+  const [minOCE, setMinOCE] = useState(50);
 
   const handleMinOCEChange = (event) => {
     setMinOCE(event.target.value);
@@ -105,6 +109,12 @@ export default function Landing() {
 
   const handleRadiusFilter = (event, newValue) => {
     setRadiusFilter(newValue);
+  };
+
+  const [filterExpanded, setFilterExpanded] = useState();
+
+  const handleFilterExpanded = () => {
+    setFilterExpanded(!filterExpanded);
   };
 
   const marks = [
@@ -131,13 +141,13 @@ export default function Landing() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        gap: 3,
+        gap: 2,
       }}
     >
-      <Box>
-        <MapAutocomplete location={address} setLocation={setAddress} />
-      </Box>
-      <Box sx={{ mb: 3 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+        <Typography variant="h6">
+          Atrodi labākās skolas sev tuvumā 👇
+        </Typography>
         {allSchools && (
           <Map
             schools={allSchools}
@@ -152,54 +162,105 @@ export default function Landing() {
       {filteredSchools && filteredSchools.length === 0 && (
         <Typography>Šajā apkaimē skolas vēl netika pievienotas.</Typography>
       )}
-      <Box>
-        <FormControl sx={{ m: 1, width: 300 }}>
-          <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
-          <Select
-            multiple
-            value={interestTagsSelected}
-            onChange={handleInterestTagChange}
-            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-            renderValue={(selected) => (
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                {selected.map((value) => (
-                  <Chip key={value} label={value} />
-                ))}
-              </Box>
-            )}
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "end",
+          }}
+        >
+          <Typography sx={{ fontWeight: "500" }}>Adrese</Typography>
+          <Button
+            onClick={handleFilterExpanded}
+            color={filterExpanded ? "primary" : "tetriary"}
+            size="medium"
           >
-            {interestTagsList.map((name) => (
-              <MenuItem key={name} value={name}>
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <TextField
-          label="Minimālais OCE"
-          value={minOCE}
-          onChange={handleMinOCEChange}
-        />
-      </Box>
-
-      <Box sx={{ px: 2 }}>
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Typography>Attālums:</Typography>
-          <Typography sx={{ fontWeight: 500 }}>{radiusFilter} km</Typography>
+            <FilterListIcon />
+            <Typography
+              variant="subtitle1"
+              sx={{ textTransform: "none", fontWeight: "500" }}
+            >
+              Filtrs
+            </Typography>
+          </Button>
         </Box>
-        <Slider
-          aria-label="Custom marks"
-          value={radiusFilter}
-          valueLabelDisplay="auto"
-          onChange={handleRadiusFilter}
-          marks
-          step={1}
-          min={1}
-          max={10}
-        />
+        <MapAutocomplete location={address} setLocation={setAddress} />
+        <Collapse in={filterExpanded} timeout="auto" unmountOnExit>
+          <Box sx={{ px: 2, py: 1 }}>
+            <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
+                Attālums
+              </Typography>
+              <Typography variant="h6" sx={{ fontWeight: 500 }}>
+                {radiusFilter} km
+              </Typography>
+            </Box>
+            <Slider
+              aria-label="Custom marks"
+              value={radiusFilter}
+              valueLabelDisplay="auto"
+              onChange={handleRadiusFilter}
+              marks
+              step={1}
+              min={1}
+              max={10}
+            />
+          </Box>
+
+          <Box sx={{ px: 2 }}>
+            <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
+                Minimālais OCE
+              </Typography>
+              <Typography variant="h6" sx={{ fontWeight: 500 }}>
+                {minOCE}%
+              </Typography>
+            </Box>
+            <Slider
+              value={minOCE}
+              track="inverted"
+              valueLabelDisplay="auto"
+              onChange={handleMinOCEChange}
+              step={1}
+              min={1}
+              max={100}
+            />
+          </Box>
+
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1, px: 1 }}>
+            <FormControl>
+              <InputLabel id="demo-select-large-label">Intereses</InputLabel>
+              <Select
+                multiple
+                value={interestTagsSelected}
+                onChange={handleInterestTagChange}
+                input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                renderValue={(selected) => (
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} size="small" />
+                    ))}
+                  </Box>
+                )}
+              >
+                {interestTagsList
+                  .sort((a, b) => a.localeCompare(b))
+                  .map((name) => (
+                    <MenuItem key={name} value={name}>
+                      {name}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </Collapse>
       </Box>
       {doubleFilteredSchools && (
-        <Box sx={{ mb: 2 }}>
+        <Box sx={{ py: 2 }}>
+          <Typography variant="h6">
+            {"Skolas (" + doubleFilteredSchools.length.toString() + ")"}
+          </Typography>
           {doubleFilteredSchools.map((item) => (
             <SchoolListItem school={item} key={item.id} />
           ))}

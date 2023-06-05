@@ -37,7 +37,6 @@ const GoogleMapAutocomplete = ({ location, setLocation }) => {
             fullWidth
             {...getInputProps({
               placeholder: "Ievadi adresi...",
-              label: "Adrese",
             })}
             InputProps={{
               endAdornment: (
