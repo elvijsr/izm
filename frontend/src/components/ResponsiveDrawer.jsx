@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Logo from "../assets/Logo2.svg";
+import Logo from "../assets/Logo3.svg";
 import LogoWhite from "../assets/Logo-white.svg";
 import Avatar from "@mui/material/Avatar";
 
