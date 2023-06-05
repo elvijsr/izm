@@ -7,7 +7,7 @@ const GoogleMapComponent = ({
   origin,
   schoolRadius,
   doubleFilteredSchools,
-  setDoubleFilteredSchools
+  setDoubleFilteredSchools,
 }) => {
   const destinations = schools.map((school) => school.address);
   const [googleApiObj, setIsGoogleApiLoadedObj] = useState(null);
@@ -145,7 +145,7 @@ const GoogleMapComponent = ({
   };
 
   return (
-    <div style={{ height: "400px", width: "100%" }}>
+    <div style={{ height: "200px", width: "100%" }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: import.meta.env.VITE_MAPS_API_KEY }}
         defaultCenter={{ lat: 56.95, lng: 24.116667 }}

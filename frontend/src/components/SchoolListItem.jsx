@@ -7,6 +7,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  ListItemButton,
   Collapse,
 } from "@mui/material";
 
@@ -60,6 +61,7 @@ export default function SchoolListItem(props) {
       sx={{
         borderRadius: 5,
         border: accordionExpanded ? "1px solid lightgrey" : "",
+        py: 1,
       }}
       elevation={0}
       expanded={accordionExpanded === props.school.id}
@@ -153,15 +155,17 @@ export default function SchoolListItem(props) {
             </Typography>
           </ListItem>
           {props.school.interest_tags && (
-            <ListItem onClick={handleInterestClick}>
-              {interestExpanded ? <ExpandLess /> : <ExpandMore />}
-              <ListItemText>
-                <Typography sx={{ fontWeight: "700" }}>
-                  {"Interešu izglītība (" +
-                    props.school.interest_tags.length.toString() +
-                    ")"}
-                </Typography>
-              </ListItemText>
+            <ListItem onClick={handleInterestClick} disableGutters>
+              <ListItemButton sx={{ gap: 1 }}>
+                {interestExpanded ? <ExpandLess /> : <ExpandMore />}
+                <ListItemText>
+                  <Typography sx={{ fontWeight: "700" }}>
+                    {"Interešu izglītība (" +
+                      props.school.interest_tags.length.toString() +
+                      ")"}
+                  </Typography>
+                </ListItemText>
+              </ListItemButton>
             </ListItem>
           )}
           <Collapse in={interestExpanded} timeout="auto" unmountOnExit>
@@ -174,41 +178,59 @@ export default function SchoolListItem(props) {
                 }}
               >
                 {props.school.interest_tags &&
+                  props.school.interest_tags.length > 0 &&
                   props.school.interest_tags.map((interest) => (
-                    <Chip label={interest} size="small" />
+                    <Chip
+                      label={interest}
+                      size="small"
+                      sx={{ backgroundColor: theme.palette.success.lightest }}
+                    />
                   ))}
+                {props.school.interest_tags &&
+                  props.school.interest_tags.length <= 0 && (
+                    <Box sx={{ display: "flex", justifyContent: "center" }}>
+                      <Typography sx={{ textAlign: "center" }}>
+                        Šī skola nav pievienojusi savas interešu izglītības
+                        iespējas
+                      </Typography>
+                    </Box>
+                  )}
               </ListItem>
             </List>
           </Collapse>
-          <ListItem onClick={handleOceClick} sx={{ gap: 1 }}>
-            {oceExpanded ? <ExpandLess /> : <ExpandMore />}
-            <ListItemText>
-              <Typography sx={{ fontWeight: "700" }}>OCE indekss</Typography>
-            </ListItemText>
-            <Typography sx={{ fontWeight: "500" }}>
-              {(props.school.oce_index_21 * 100).toFixed(2)}%
-            </Typography>
-            <Chip
-              size="small"
-              icon={<ShowChartIcon />}
-              sx={{
-                color:
+          <ListItem onClick={handleOceClick} sx={{ gap: 1 }} disableGutters>
+            <ListItemButton sx={{ gap: 1 }}>
+              {oceExpanded ? <ExpandLess /> : <ExpandMore />}
+              <ListItemText secondary="un pieaugums šogad">
+                <Typography sx={{ fontWeight: "700" }}>OCE indekss</Typography>
+              </ListItemText>
+              <Typography sx={{ fontWeight: "500" }}>
+                {(props.school.oce_index_21 * 100).toFixed(2)}%
+              </Typography>
+              <Chip
+                size="small"
+                icon={<ShowChartIcon />}
+                sx={{
+                  color:
+                    props.school.oce_index_21 - props.school.oce_index_20 > 0
+                      ? theme.palette.success.dark
+                      : theme.palette.alert.dark,
+                }}
+                label={
                   props.school.oce_index_21 - props.school.oce_index_20 > 0
-                    ? theme.palette.success.dark
-                    : theme.palette.alert.dark,
-              }}
-              label={
-                props.school.oce_index_21 - props.school.oce_index_20 > 0
-                  ? `+${(
-                      (props.school.oce_index_21 - props.school.oce_index_20) *
-                      100
-                    ).toFixed(2)}%`
-                  : `${(
-                      (props.school.oce_index_21 - props.school.oce_index_20) *
-                      100
-                    ).toFixed(2)}%`
-              }
-            />
+                    ? `+${(
+                        (props.school.oce_index_21 -
+                          props.school.oce_index_20) *
+                        100
+                      ).toFixed(2)}%`
+                    : `${(
+                        (props.school.oce_index_21 -
+                          props.school.oce_index_20) *
+                        100
+                      ).toFixed(2)}%`
+                }
+              />
+            </ListItemButton>
           </ListItem>
           <Collapse in={oceExpanded} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
