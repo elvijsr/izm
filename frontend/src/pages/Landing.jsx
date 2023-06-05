@@ -9,6 +9,7 @@ import {
   ListItemText,
   Link,
   Slider,
+  Switch,
 } from "@mui/material";
 import SchoolListItem from "../components/SchoolListItem";
 import { useEffect, useState } from "react";
@@ -22,11 +23,35 @@ export default function Landing() {
   );
   const [allSchools, setAllSchools] = useState(null);
   const [filteredSchools, setFilteredSchools] = useState(null);
+  const [doubleFilteredSchools, setDoubleFilteredSchools] = useState(null);
   const [radiusFilter, setRadiusFilter] = useState(2);
+
   const fetchSchoolsFromAPI = async () => {
     const response = await fetchSchools();
     console.log(response);
     setAllSchools(response.data);
+  };
+
+  const [filterList, setFilterList] = useState({ idFilter: undefined });
+  const masterFilter = () => {
+    let list = filteredSchools;
+
+    if (filterList.idFilter) {
+      list = list.filter((school) => school.id === filterList.idFilter);
+    }
+
+    setDoubleFilteredSchools(list);
+  };
+
+  const [checked, setChecked] = useState(false);
+  const handleIdChange = (event) => {
+    setChecked(event.target.checked);
+
+    if (event.target.checked) {
+      setFilterList({ ...filterList, idFilter: 1 });
+    } else {
+      setFilterList({ ...filterList, idFilter: undefined });
+    }
   };
 
   const handleRadiusFilter = (event, newValue) => {
@@ -43,6 +68,10 @@ export default function Landing() {
       label: "10 km",
     },
   ];
+
+  useEffect(() => {
+    masterFilter();
+  }, [filterList]);
 
   useEffect(() => {
     fetchSchoolsFromAPI();
@@ -66,12 +95,19 @@ export default function Landing() {
             setFilteredSchools={setFilteredSchools}
             origin={address}
             schoolRadius={radiusFilter}
+            doubleFilteredSchools={doubleFilteredSchools}
+            setDoubleFilteredSchools={setDoubleFilteredSchools}
           />
         )}
       </Box>
       {filteredSchools && filteredSchools.length === 0 && (
         <Typography>Šajā apkaimē skolas vēl netika pievienotas.</Typography>
       )}
+      <Switch
+        checked={checked}
+        onChange={handleIdChange}
+        inputProps={{ "aria-label": "controlled" }}
+      />
       <Box sx={{ px: 2 }}>
         <Box sx={{ display: "flex", gap: 1 }}>
           <Typography>Attālums:</Typography>
@@ -88,9 +124,9 @@ export default function Landing() {
           max={10}
         />
       </Box>
-      {filteredSchools && (
+      {doubleFilteredSchools && (
         <Box sx={{ mb: 2 }}>
-          {filteredSchools.map((item) => (
+          {doubleFilteredSchools.map((item) => (
             <SchoolListItem school={item} key={item.id} />
           ))}
         </Box>

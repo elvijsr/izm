@@ -6,6 +6,8 @@ const GoogleMapComponent = ({
   setFilteredSchools,
   origin,
   schoolRadius,
+  doubleFilteredSchools,
+  setDoubleFilteredSchools
 }) => {
   const destinations = schools.map((school) => school.address);
   const [googleApiObj, setIsGoogleApiLoadedObj] = useState(null);
@@ -43,8 +45,10 @@ const GoogleMapComponent = ({
     const filteredSchools = allSchools.filter(
       (school) => school.distance <= schoolRadius
     );
-    console.log(filteredSchools.length);
     setFilteredSchools(filteredSchools);
+    if (!doubleFilteredSchools) {
+      setDoubleFilteredSchools(filteredSchools);
+    }
     addSchoolMarkers(filteredSchools, maps, map);
   };
 
