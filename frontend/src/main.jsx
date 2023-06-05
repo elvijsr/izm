@@ -27,11 +27,13 @@ const theme = createTheme({
       main: "#4389A2",
     },
     alert: {
+      lightest: red[100],
       light: red[200],
       main: red[500],
       dark: red[700],
     },
     success: {
+      lightest: green[100],
       light: green[200],
       main: green[500],
       dark: green[700],
