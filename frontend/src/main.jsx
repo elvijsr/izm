@@ -27,10 +27,14 @@ const theme = createTheme({
       main: "#4389A2",
     },
     alert: {
-      main: red[200],
+      light: red[200],
+      main: red[500],
+      dark: red[700],
     },
     success: {
-      main: green[200],
+      light: green[200],
+      main: green[500],
+      dark: green[700],
     },
     text: {
       body: "#FFFFFF",

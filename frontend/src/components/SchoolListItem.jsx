@@ -91,10 +91,10 @@ export default function SchoolListItem(props) {
               size="small"
               icon={<ShowChartIcon />}
               sx={{
-                backgroundColor:
+                color:
                   props.school.oce_index_21 - props.school.oce_index_20 > 0
-                    ? theme.palette.success.main
-                    : theme.palette.alert.main,
+                    ? theme.palette.success.dark
+                    : theme.palette.alert.dark,
               }}
               label={
                 props.school.oce_index_21 - props.school.oce_index_20 > 0
@@ -183,19 +183,19 @@ export default function SchoolListItem(props) {
           <ListItem onClick={handleOceClick} sx={{ gap: 1 }}>
             {oceExpanded ? <ExpandLess /> : <ExpandMore />}
             <ListItemText>
-              <Typography sx={{ fontWeight: "700" }}>OCE indekss:</Typography>
+              <Typography sx={{ fontWeight: "700" }}>OCE indekss</Typography>
             </ListItemText>
-            <Typography>
+            <Typography sx={{ fontWeight: "500" }}>
               {(props.school.oce_index_21 * 100).toFixed(2)}%
             </Typography>
             <Chip
               size="small"
               icon={<ShowChartIcon />}
               sx={{
-                backgroundColor:
+                color:
                   props.school.oce_index_21 - props.school.oce_index_20 > 0
-                    ? theme.palette.success.main
-                    : theme.palette.alert.main,
+                    ? theme.palette.success.dark
+                    : theme.palette.alert.dark,
               }}
               label={
                 props.school.oce_index_21 - props.school.oce_index_20 > 0
@@ -215,7 +215,7 @@ export default function SchoolListItem(props) {
               <ListItem sx={{ gap: 1 }}>
                 <ListItemText>
                   <Typography sx={{ fontWeight: "500" }}>
-                    Latviešu valoda:
+                    Latviešu valoda
                   </Typography>
                 </ListItemText>
                 <Typography>
@@ -223,16 +223,26 @@ export default function SchoolListItem(props) {
                 </Typography>
                 <Chip
                   size="small"
+                  icon={<ShowChartIcon />}
                   sx={{
-                    backgroundColor:
+                    color:
                       props.school.oce_latv_21 - props.school.oce_latv_20 > 0
-                        ? theme.palette.success.main
-                        : theme.palette.alert.main,
+                        ? theme.palette.success.dark
+                        : theme.palette.alert.dark,
                   }}
-                  label={`${(
-                    (props.school.oce_latv_21 - props.school.oce_latv_20) *
-                    100
-                  ).toFixed(2)}%`}
+                  label={
+                    props.school.oce_latv_21 - props.school.oce_latv_20 > 0
+                      ? `+${(
+                          (props.school.oce_latv_21 -
+                            props.school.oce_latv_20) *
+                          100
+                        ).toFixed(2)}%`
+                      : `${(
+                          (props.school.oce_latv_21 -
+                            props.school.oce_latv_20) *
+                          100
+                        ).toFixed(2)}%`
+                  }
                 />
               </ListItem>
               <ListItem sx={{ gap: 1 }}>
@@ -246,39 +256,57 @@ export default function SchoolListItem(props) {
                 </Typography>
                 <Chip
                   size="small"
+                  icon={<ShowChartIcon />}
                   sx={{
-                    backgroundColor:
+                    color:
                       props.school.oce_math_21 - props.school.oce_math_20 > 0
-                        ? theme.palette.success.main
-                        : theme.palette.alert.main,
+                        ? theme.palette.success.dark
+                        : theme.palette.alert.dark,
                   }}
-                  label={`${(
-                    (props.school.oce_math_21 - props.school.oce_math_20) *
-                    100
-                  ).toFixed(2)}%`}
+                  label={
+                    props.school.oce_math_21 - props.school.oce_math_20 > 0
+                      ? `+${(
+                          (props.school.oce_math_21 -
+                            props.school.oce_math_20) *
+                          100
+                        ).toFixed(2)}%`
+                      : `${(
+                          (props.school.oce_math_21 -
+                            props.school.oce_math_20) *
+                          100
+                        ).toFixed(2)}%`
+                  }
                 />
               </ListItem>
               <ListItem sx={{ gap: 1 }}>
                 <ListItemText>
-                  <Typography sx={{ fontWeight: "500" }}>
-                    Svešvaloda:
-                  </Typography>
+                  <Typography sx={{ fontWeight: "500" }}>Svešvaloda</Typography>
                 </ListItemText>
                 <Typography>
                   {(props.school.oce_sves_21 * 100).toFixed(2)}%
                 </Typography>
                 <Chip
                   size="small"
+                  icon={<ShowChartIcon />}
                   sx={{
-                    backgroundColor:
+                    color:
                       props.school.oce_sves_21 - props.school.oce_sves_20 > 0
-                        ? theme.palette.success.main
-                        : theme.palette.alert.main,
+                        ? theme.palette.success.dark
+                        : theme.palette.alert.dark,
                   }}
-                  label={`${(
-                    (props.school.oce_sves_21 - props.school.oce_sves_20) *
-                    100
-                  ).toFixed(2)}%`}
+                  label={
+                    props.school.oce_sves_21 - props.school.oce_sves_20 > 0
+                      ? `+${(
+                          (props.school.oce_sves_21 -
+                            props.school.oce_sves_20) *
+                          100
+                        ).toFixed(2)}%`
+                      : `${(
+                          (props.school.oce_sves_21 -
+                            props.school.oce_sves_20) *
+                          100
+                        ).toFixed(2)}%`
+                  }
                 />
               </ListItem>
             </List>
