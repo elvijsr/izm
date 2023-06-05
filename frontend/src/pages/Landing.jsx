@@ -228,7 +228,15 @@ export default function Landing() {
             />
           </Box>
 
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 1, px: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 1,
+              px: 1,
+              pt: 1,
+            }}
+          >
             <FormControl>
               <InputLabel id="demo-select-large-label">Intereses</InputLabel>
               <Select
