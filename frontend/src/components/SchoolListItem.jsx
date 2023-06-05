@@ -191,7 +191,7 @@ export default function SchoolListItem(props) {
           <ListItem onClick={handleOceClick} sx={{ gap: 1 }} disableGutters>
             <ListItemButton sx={{ gap: 1 }}>
               {oceExpanded ? <ExpandLess /> : <ExpandMore />}
-              <ListItemText>
+              <ListItemText secondary="un pieaugums šogad">
                 <Typography sx={{ fontWeight: "700" }}>OCE indekss</Typography>
               </ListItemText>
               <Typography sx={{ fontWeight: "500" }}>
