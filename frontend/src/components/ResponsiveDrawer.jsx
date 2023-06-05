@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Logo from "../assets/Logo.svg";
+import Logo from "../assets/Logo2.svg";
 import LogoWhite from "../assets/Logo-white.svg";
 import Avatar from "@mui/material/Avatar";
 
@@ -111,6 +111,9 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton> */}
+          <Avatar sx={{ backgroundColor: "#FFFFFF", margin: 1 }}>
+            <img src={Logo} className="logo" width="35" />
+          </Avatar>
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography
               variant="h5"
@@ -121,9 +124,6 @@ function ResponsiveDrawer(props) {
               SkoluRadars
             </Typography>
           </Link>
-          <Avatar sx={{ backgroundColor: "#FFFFFF", margin: 1 }}>
-            <img src={Logo} className="logo" width="35" />
-          </Avatar>
         </Toolbar>
       </AppBar>
       {/* <Box
