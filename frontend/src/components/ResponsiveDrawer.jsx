@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Logo from "../assets/Logo3.svg";
+import Logo from "../assets/Logo4.svg";
 import LogoWhite from "../assets/Logo-white.svg";
 import Avatar from "@mui/material/Avatar";
 
@@ -59,12 +59,8 @@ function ResponsiveDrawer(props) {
             flexDirection: "row",
             textDecoration: "none",
             alignItems: "center",
-            color: "#B15CF4",
           }}
         >
-          <Typography variant="h5" sx={{ fontWeight: 700 }} noWrap>
-            SkoluRadars
-          </Typography>
           <Avatar sx={{ backgroundColor: "#FFFFFF", margin: 1 }}>
             <img src={LogoWhite} className="logo" width="35" />
           </Avatar>
@@ -114,14 +110,22 @@ function ResponsiveDrawer(props) {
           <Avatar sx={{ backgroundColor: "#FFFFFF", margin: 1 }}>
             <img src={Logo} className="logo" width="35" />
           </Avatar>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/" style={{ textDecoration: "none", display: "flex" }}>
+            <Typography
+              variant="h5"
+              sx={{ fontWeight: 700 }}
+              component="div"
+              color="#000000"
+            >
+              Skolu
+            </Typography>
             <Typography
               variant="h5"
               sx={{ fontWeight: 700 }}
               component="div"
               color="#B15CF4"
             >
-              SkoluRadars
+              Radars
             </Typography>
           </Link>
         </Toolbar>
