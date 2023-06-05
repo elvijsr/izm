@@ -24,6 +24,7 @@ import MapIcon from "@mui/icons-material/Map";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
+import InterestsIcon from "@mui/icons-material/Interests";
 import { useTheme } from "@mui/material/styles";
 import * as React from "react";
 
@@ -45,10 +46,13 @@ export default function SchoolListItem(props) {
   };
 
   const [oceExpanded, setOceExpanded] = React.useState(false);
+  const [interestExpanded, setInterestExpanded] = React.useState(false);
   const handleOceClick = () => {
     setOceExpanded(!oceExpanded);
   };
-
+  const handleInterestClick = () => {
+    setInterestExpanded(!interestExpanded);
+  };
   const theme = useTheme();
 
   return (
@@ -109,6 +113,13 @@ export default function SchoolListItem(props) {
               size="small"
               label={`${props.school.distance} km`}
             />
+            {props.school.interest_tags && (
+              <Chip
+                icon={<InterestsIcon />}
+                size="small"
+                label={props.school.interest_tags.length}
+              />
+            )}
           </Box>
         </Box>
       </AccordionSummary>
@@ -141,6 +152,34 @@ export default function SchoolListItem(props) {
               />
             </Typography>
           </ListItem>
+          {props.school.interest_tags && (
+            <ListItem onClick={handleInterestClick}>
+              {interestExpanded ? <ExpandLess /> : <ExpandMore />}
+              <ListItemText>
+                <Typography sx={{ fontWeight: "700" }}>
+                  {"Interešu izglītība (" +
+                    props.school.interest_tags.length.toString() +
+                    ")"}
+                </Typography>
+              </ListItemText>
+            </ListItem>
+          )}
+          <Collapse in={interestExpanded} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem
+                sx={{
+                  gap: 1,
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                }}
+              >
+                {props.school.interest_tags &&
+                  props.school.interest_tags.map((interest) => (
+                    <Chip label={interest} size="small" />
+                  ))}
+              </ListItem>
+            </List>
+          </Collapse>
           <ListItem onClick={handleOceClick} sx={{ gap: 1 }}>
             {oceExpanded ? <ExpandLess /> : <ExpandMore />}
             <ListItemText>
