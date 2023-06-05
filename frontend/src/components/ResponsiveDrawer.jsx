@@ -14,8 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Logo from "../assets/Logo4.svg";
-import LogoWhite from "../assets/Logo-white.svg";
+import Logo from "../assets/Logo.svg";
 import Avatar from "@mui/material/Avatar";
 
 function ResponsiveDrawer(props) {
@@ -60,11 +59,7 @@ function ResponsiveDrawer(props) {
             textDecoration: "none",
             alignItems: "center",
           }}
-        >
-          <Avatar sx={{ backgroundColor: "#FFFFFF", margin: 1 }}>
-            <img src={LogoWhite} className="logo" width="35" />
-          </Avatar>
-        </Box>
+        ></Box>
       </Toolbar>
       <List>
         {pages.map((item, index) => (
