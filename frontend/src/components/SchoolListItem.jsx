@@ -178,7 +178,7 @@ export default function SchoolListItem(props) {
                 }}
               >
                 {props.school.interest_tags &&
-                  props.school.interest_tags > 0 &&
+                  props.school.interest_tags.length > 0 &&
                   props.school.interest_tags.map((interest) => (
                     <Chip
                       label={interest}
@@ -187,7 +187,7 @@ export default function SchoolListItem(props) {
                     />
                   ))}
                 {props.school.interest_tags &&
-                  props.school.interest_tags <= 0 && (
+                  props.school.interest_tags.length <= 0 && (
                     <Box sx={{ display: "flex", justifyContent: "center" }}>
                       <Typography sx={{ textAlign: "center" }}>
                         Šī skola nav pievienojusi savas interešu izglītības
